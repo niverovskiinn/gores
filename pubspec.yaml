@@ -31,7 +31,8 @@ dependencies:
   get: ^3.25.6
   integration_test: ^1.0.1
   json_serializable: ^3.5.1
-
+  flutter_svg: 
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter

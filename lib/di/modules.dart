@@ -8,6 +8,5 @@ class InitialBinding implements Bindings {
   void dependencies() {
     Get.lazyPut<AuthController>(() => AuthController());
     Get.lazyPut<ProfileController>(() => ProfileController());
-    // Get.put<Service>(()=> Api());
   }
 }

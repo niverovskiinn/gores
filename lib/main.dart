@@ -1,6 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:gores/ui/widgets/background.dart';
+import 'package:gores/ui/widgets/loading.dart';
 import 'base/lang/translation_service.dart';
 import 'base/routes.dart';
 import 'base/style.dart';
@@ -24,21 +26,27 @@ class MyApp extends StatelessWidget {
       locale: TranslationService.locale,
       title: 'GoRes',
       theme: appTheme,
-      home: InitialPage(),
+      home: Root(),
+      onReady: checkLoggedIn,
     );
+  }
+
+  void checkLoggedIn() {
+    Future.delayed(Duration(seconds: 2), () {
+      Get.offAllNamed(Routes.login);
+    });
   }
 }
 
-class InitialPage extends StatefulWidget {
-  InitialPage({Key key}) : super(key: key);
+class Root extends StatelessWidget {
+  Root({Key key}) : super(key: key);
 
-  @override
-  _InitialPageState createState() => _InitialPageState();
-}
-
-class _InitialPageState extends State<InitialPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return DefaultBackground(
+      child: Center(
+        child: Loading(),
+      ),
+    );
   }
 }
