@@ -1,4 +1,4 @@
-package com.example.gores
+package com.niverovskiinn.gores
 
 import io.flutter.embedding.android.FlutterActivity
 
