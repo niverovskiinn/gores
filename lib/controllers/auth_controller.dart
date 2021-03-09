@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:gores/base/lang/en_US.dart';
@@ -42,8 +44,15 @@ class AuthController extends GetxController {
         email: email,
         password: password,
       );
-    } catch (e) {
-      snackbarError(error.tr, e.message);
+    } on FirebaseAuthException catch (e) {
+      switch (e.code) {
+        case 'user-not-found':
+          snackbarError(error.tr, userNotFound.tr);
+          break;
+        default:
+          log(e.code);
+          snackbarError(error.tr, e.message);
+      }
     }
   }
 

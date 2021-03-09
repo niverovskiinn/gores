@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
 import 'package:gores/base/dimensions.dart';
 import 'package:gores/base/images.dart';
 import 'package:gores/base/style.dart';
@@ -8,36 +9,50 @@ class DefaultAppBar extends StatelessWidget with PreferredSizeWidget {
   final Widget trailing;
   final Widget center;
   final String title;
+  final bool back;
   DefaultAppBar({
     Key key,
     this.leading,
     this.trailing,
     this.title,
     this.center,
+    this.back = false,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(30),
-          ),
-          gradient: LinearGradient(
-            colors: [Colors.black, greyColor],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          )),
+        gradient: LinearGradient(
+          colors: [
+            greenColor,
+            aquamarineColor,
+          ],
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+        ),
+      ),
       height: appbarHeight,
       width: double.infinity,
       padding: defaultHorizontalPadding,
       child: Row(
         children: [
           if (leading != null) leading,
+          if (back)
+            ClipOval(
+              child: Material(
+                color: Colors.transparent,
+                child: IconButton(
+                  icon: Icon(Icons.arrow_back),
+                  onPressed: () => Get.back(),
+                  splashColor: pinkColor,
+                ),
+              ),
+            ),
           Image.asset(
             Images.logo,
-            height: 40,
-            width: 40,
+            height: 30,
+            width: 30,
           ),
           if (center != null) center,
           if (title != null)

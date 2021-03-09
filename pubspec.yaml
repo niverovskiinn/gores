@@ -27,12 +27,14 @@ dependencies:
   cupertino_icons: ^1.0.0
   firebase_auth: ^0.20.1
   firebase_core: ^0.7.0
+  flutter_neumorphic: ^3.0.4+1
+  flutter_svg: null
   freezed_annotation: ^0.12.0
   get: ^3.25.6
   integration_test: ^1.0.1
+  intl_phone_field: ^1.4.4
   json_serializable: ^3.5.1
-  flutter_svg: 
-  
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -50,7 +52,7 @@ flutter:
   uses-material-design: true
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/images/
+    - assets/images/logo/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
   # For details regarding adding assets from package dependencies, see
@@ -61,6 +63,45 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
+    - family: Alegreya
+      fonts:
+        - asset: assets/fonts/alegreya/Alegreya-Black.ttf
+          weight: 900
+          style: normal
+        - asset: assets/fonts/alegreya/Alegreya-BlackItalic.ttf
+          weight: 900
+          style: italic
+        - asset: assets/fonts/alegreya/Alegreya-Bold.ttf
+          weight: 700
+          style: normal
+        - asset: assets/fonts/alegreya/Alegreya-BoldItalic.ttf
+          weight: 700
+          style: italic
+        - asset: assets/fonts/alegreya/Alegreya-ExtraBold.ttf
+          weight: 800
+          style: normal
+        - asset: assets/fonts/alegreya/Alegreya-ExtraBoldItalic.ttf
+          weight: 800
+          style: italic
+        - asset: assets/fonts/alegreya/Alegreya-Italic.ttf
+          weight: 400
+          style: italic
+        - asset: assets/fonts/alegreya/Alegreya-Regular.ttf
+          weight: 400
+          style: normal
+        - asset: assets/fonts/alegreya/Alegreya-Medium.ttf
+          weight: 500
+          style: normal
+        - asset: assets/fonts/alegreya/Alegreya-MediumItalic.ttf
+          weight: 500
+          style: italic
+        - asset: assets/fonts/alegreya/Alegreya-SemiBold.ttf
+          weight: 600
+          style: normal
+        - asset: assets/fonts/alegreya/Alegreya-SemiBoldItalic.ttf
+          weight: 600
+          style: italic
+
     - family: Lobster
       fonts:
         - asset: assets/fonts/lobster/Lobster-Regular.ttf

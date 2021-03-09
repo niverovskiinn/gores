@@ -23,7 +23,9 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       initialBinding: InitialBinding(),
       getPages: getPages,
-      locale: TranslationService.locale,
+      translations: TranslationService(),
+      locale: Get.deviceLocale,
+      fallbackLocale: TranslationService.fallbackLocale,
       title: 'GoRes',
       theme: appTheme,
       home: Root(),
@@ -32,9 +34,7 @@ class MyApp extends StatelessWidget {
   }
 
   void checkLoggedIn() {
-    Future.delayed(Duration(seconds: 2), () {
-      Get.offAllNamed(Routes.login);
-    });
+    Get.offAllNamed(Routes.login);
   }
 }
 

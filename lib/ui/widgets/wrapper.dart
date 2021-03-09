@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gores/base/dimensions.dart';
-import 'package:gores/base/style.dart';
 
 class DefaultWrapper extends StatelessWidget {
   final Widget child;

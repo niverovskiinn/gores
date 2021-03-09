@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 
-void snackbarError(String title, String message) {
+void snackbarSuccess(String title, String message) {
   Get.rawSnackbar(
     title: title,
     message: message,
@@ -25,7 +25,7 @@ void snackbarWarning(String title, String message) {
   );
 }
 
-void snackbarSuccess(String title, String message) {
+void snackbarError(String title, String message) {
   Get.rawSnackbar(
     title: title,
     message: message,

@@ -11,11 +11,12 @@ class DefaultBackground extends StatelessWidget {
     return Container(
       constraints: BoxConstraints.expand(),
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [Colors.green[200], limeColor],
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-        ),
+        color: aquamarineColor,
+        // gradient: LinearGradient(
+        //   colors: [greenColor, aquamarineColor],
+        //   begin: Alignment.topCenter,
+        //   end: Alignment.bottomCenter,
+        // ),
       ),
       child: child,
     );
