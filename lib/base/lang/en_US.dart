@@ -15,7 +15,9 @@ const badPassword = "badPassword";
 const confPassNotEqualPass = "confPassNotEqualPass";
 const flag = "flag";
 const countrySearch = "countrySearch";
-
+const userDisabled = "userDisabled";
+const emailInUse = "emailInUse";
+const operarionNotAllowed = "operarionNotAllowed";
 const Map<String, String> en_US = {
   flag: "🇺🇸",
   error: "Error",
@@ -35,4 +37,7 @@ const Map<String, String> en_US = {
       "Password must be longer 8 characters and must contain at least one upper case, one lower case and one number.",
   confPassNotEqualPass: "Passwords aren't equal",
   countrySearch: 'Search by Country Name',
+  userDisabled: "You're banned.",
+  emailInUse: "This email already in use.",
+  operarionNotAllowed: "This operation not allowed for this credentials.",
 };

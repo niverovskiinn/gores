@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:get/get.dart';
 import 'package:gores/base/lang/en_US.dart';
 import 'package:gores/controllers/auth_controller.dart';
@@ -29,15 +31,16 @@ class SignUpController extends GetxController {
   set confPassword(String value) => this._confPassword.value = value;
   String get confPassword => this._confPassword.value;
 
-  void signUp() {
+  Future<bool> signUp() async {
     if (_validate()) {
-      authController.createUser(
+      return await authController.createUser(
         email: email,
         password: password,
         name: name,
         phone: phone,
       );
     }
+    return false;
   }
 
   bool _validate() {
@@ -71,8 +74,8 @@ class SignUpController extends GetxController {
     bool hasLowercase = password.contains(new RegExp(r'[a-z]'));
     bool hasSpecialCharacters =
         password.contains(new RegExp(r'[!@#$%^&*(),.?":{}|<>]'));
-    bool hasMinLength = password.length > minLength;
-
+    bool hasMinLength = password.length >= minLength;
+    log("hasUppercase$hasUppercase\nhasDigits$hasDigits\nhasLowercase$hasLowercase\nhasMinLength$hasMinLength\n");
     return hasDigits & hasUppercase & hasLowercase & hasMinLength;
   }
 }

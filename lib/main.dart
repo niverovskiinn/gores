@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:gores/controllers/auth_controller.dart';
 import 'package:gores/ui/widgets/background.dart';
 import 'package:gores/ui/widgets/loading.dart';
 import 'base/lang/translation_service.dart';
@@ -35,7 +36,12 @@ class MyApp extends StatelessWidget {
 
   void prepare() async {
     await Get.find<TranslationService>().restoreLocale();
-    Get.offAllNamed(Routes.login);
+
+    if (Get.find<AuthController>().isLoggedIn()) {
+      Get.offAllNamed(Routes.home);
+    } else {
+      Get.offAllNamed(Routes.login);
+    }
   }
 }
 

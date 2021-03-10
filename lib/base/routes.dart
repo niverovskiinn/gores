@@ -5,7 +5,7 @@ import 'package:gores/ui/home/home.dart';
 
 // https://github.com/jonataslaw/getx/blob/master/documentation/en_US/route_management.md
 abstract class Routes {
-  static const home = "/";
+  static const home = "/home";
   static const login = "/login";
   static const signup = "/signup";
 }

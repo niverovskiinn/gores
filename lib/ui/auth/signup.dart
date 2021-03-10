@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gores/base/dimensions.dart';
 import 'package:gores/base/lang/en_US.dart';
+import 'package:gores/base/routes.dart';
 import 'package:gores/controllers/signup_controller.dart';
 import 'package:gores/ui/widgets/appbar.dart';
 import 'package:gores/ui/widgets/background.dart';
@@ -25,7 +26,11 @@ class SignUpPage extends GetView<SignUpController> {
             children: [
               Spacer(),
               DefaultButton(
-                onTap: () => controller.signUp(),
+                onTap: () async {
+                  if (await controller.signUp()) {
+                    Get.offAllNamed(Routes.home);
+                  }
+                },
                 title: next.tr.toUpperCase(),
               ),
             ],
@@ -60,7 +65,7 @@ class SignUpPage extends GetView<SignUpController> {
                 height: verticalDefaultSize,
               ),
               DefaultPhoneField(
-                onChanged: (value) {},
+                onChanged: (value) => controller.phone = value.completeNumber,
               ),
               SizedBox(
                 height: verticalDefaultSize,

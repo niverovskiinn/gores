@@ -18,10 +18,11 @@ class LoginController extends GetxController {
   set password(String value) => this._password.value = value;
   String get password => this._password.value;
 
-  void next() {
+  Future<bool> next() async {
     if (_validate()) {
-      authController.login(email, password);
+      return await authController.login(email, password);
     }
+    return false;
   }
 
   bool _validate() {

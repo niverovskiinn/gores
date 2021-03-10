@@ -30,7 +30,11 @@ class LoginPage extends GetView<LoginController> {
               ),
               Spacer(),
               DefaultButton(
-                onTap: () => controller.next(),
+                onTap: () async {
+                  if (await controller.next()) {
+                    Get.offAllNamed(Routes.home);
+                  }
+                },
                 title: next.tr.toUpperCase(),
               ),
             ],
