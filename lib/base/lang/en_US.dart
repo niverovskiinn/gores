@@ -13,8 +13,11 @@ const confirmPassword = "confirmPassword";
 const emptyName = "emptyName";
 const badPassword = "badPassword";
 const confPassNotEqualPass = "confPassNotEqualPass";
+const flag = "flag";
+const countrySearch = "countrySearch";
 
 const Map<String, String> en_US = {
+  flag: "🇺🇸",
   error: "Error",
   login: "Login",
   password: "Password",
@@ -31,4 +34,5 @@ const Map<String, String> en_US = {
   badPassword:
       "Password must be longer 8 characters and must contain at least one upper case, one lower case and one number.",
   confPassNotEqualPass: "Passwords aren't equal",
+  countrySearch: 'Search by Country Name',
 };

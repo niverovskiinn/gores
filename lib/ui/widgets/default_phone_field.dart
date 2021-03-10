@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
-import 'package:get/route_manager.dart';
+import 'package:get/get.dart';
 import 'package:gores/base/dimensions.dart';
-import 'package:gores/base/style.dart';
-import 'package:intl_phone_field/intl_phone_field.dart';
-import 'package:intl_phone_field/phone_number.dart';
+import 'package:gores/base/lang/en_US.dart';
+import 'package:gores/data/models/phone_number.dart';
+import 'package:gores/ui/widgets/phone_field.dart';
 
 class DefaultPhoneField extends StatelessWidget {
   final void Function(PhoneNumber) onChanged;
@@ -19,7 +19,9 @@ class DefaultPhoneField extends StatelessWidget {
         boxShape: NeumorphicBoxShape.stadium(),
       ),
       padding: textFieldHorizontalPadding,
-      child: IntlPhoneField(
+      child: PhoneField(
+        searchText: countrySearch.tr,
+        keyboardType: TextInputType.phone,
         dialogDecoration: BoxDecoration(),
         dialogCountriesStyle: Get.textTheme.bodyText2,
         initialCountryCode: 'UA',

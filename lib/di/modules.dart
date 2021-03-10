@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:gores/base/lang/translation_service.dart';
 import 'package:gores/controllers/auth_controller.dart';
 import 'package:gores/controllers/login_controller.dart';
 import 'package:gores/controllers/profile_controller.dart';

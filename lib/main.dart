@@ -23,17 +23,18 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       initialBinding: InitialBinding(),
       getPages: getPages,
-      translations: TranslationService(),
+      translations: Get.put<TranslationService>(TranslationService()),
       locale: Get.deviceLocale,
       fallbackLocale: TranslationService.fallbackLocale,
       title: 'GoRes',
       theme: appTheme,
       home: Root(),
-      onReady: checkLoggedIn,
+      onReady: prepare,
     );
   }
 
-  void checkLoggedIn() {
+  void prepare() async {
+    await Get.find<TranslationService>().restoreLocale();
     Get.offAllNamed(Routes.login);
   }
 }
