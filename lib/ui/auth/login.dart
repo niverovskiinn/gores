@@ -4,8 +4,6 @@ import 'package:get/get.dart';
 import 'package:gores/base/dimensions.dart';
 import 'package:gores/base/lang/en_US.dart';
 import 'package:gores/base/routes.dart';
-import 'package:gores/base/style.dart';
-import 'package:gores/controllers/auth_controller.dart';
 import 'package:gores/controllers/login_controller.dart';
 import 'package:gores/ui/widgets/appbar.dart';
 import 'package:gores/ui/widgets/background.dart';
@@ -19,7 +17,9 @@ class LoginPage extends GetView<LoginController> {
   Widget build(BuildContext context) {
     return DefaultBackground(
       child: Scaffold(
-        appBar: DefaultAppBar(),
+        appBar: DefaultAppBar(
+          locale: true,
+        ),
         bottomNavigationBar: Padding(
           padding: const EdgeInsets.fromLTRB(30, 0, 30, 50),
           child: Row(

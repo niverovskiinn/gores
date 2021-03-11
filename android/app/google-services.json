@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "9469957068",
+    "project_id": "gores-301708",
+    "storage_bucket": "gores-301708.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:9469957068:android:904d68febffae5511b8369",
+        "android_client_info": {
+          "package_name": "com.niverovskiinn.gores"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "9469957068-hurhho5hcq0rcbq1fjo1lisa474k75i3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDzxu0tDeaxTd50Kwur_0E3TgZy_yDH5s4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "9469957068-hurhho5hcq0rcbq1fjo1lisa474k75i3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "9469957068-gj2fh63p3l228n5cpnchon5m9332l3nl.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.niverovskiinn.gores"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -32,6 +32,8 @@ class TranslationService extends Translations {
     final langCode = _sharedPreferences.getString("languageCode");
     final countCode = _sharedPreferences.getString("countryCode");
 
-    Get.updateLocale(Locale(langCode, countCode));
+    if (langCode != null && countCode != null) {
+      Get.updateLocale(Locale(langCode, countCode));
+    }
   }
 }

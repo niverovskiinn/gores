@@ -21,7 +21,7 @@ class DefaultAppBar extends StatelessWidget with PreferredSizeWidget {
     this.title,
     this.center,
     this.back = false,
-    this.locale = true,
+    this.locale = false,
   }) : super(key: key);
 
   @override
@@ -40,55 +40,57 @@ class DefaultAppBar extends StatelessWidget with PreferredSizeWidget {
       height: appbarHeight,
       width: double.infinity,
       padding: defaultHorizontalPadding,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          if (leading != null) leading,
-          if (back)
-            ClipOval(
-              child: Material(
-                color: Colors.transparent,
-                child: IconButton(
-                  icon: Icon(Icons.arrow_back),
-                  onPressed: () => Get.back(),
-                  splashColor: pinkColor,
-                ),
-              ),
-            ),
-          Image.asset(
-            Images.logo,
-            height: 30,
-            width: 30,
-          ),
-          if (center != null) center,
-          if (title != null)
-            Text(
-              title,
-              style: Theme.of(context).textTheme.subtitle1,
-            ),
-          if (locale)
-            ClipOval(
-              child: Material(
-                color: Colors.transparent,
-                child: IconButton(
-                  icon: Text(
-                    Get.locale == TranslationService.ua
-                        ? en_US['flag']
-                        : ua_UA['flag'],
-                    style: TextStyle(fontSize: 30),
+      child: SafeArea(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            if (leading != null) leading,
+            if (back)
+              ClipOval(
+                child: Material(
+                  color: Colors.transparent,
+                  child: IconButton(
+                    icon: Icon(Icons.arrow_back),
+                    onPressed: () => Get.back(),
+                    splashColor: pinkColor,
                   ),
-                  onPressed: () async {
-                    await Get.find<TranslationService>().changeLocale(
-                        Get.locale == TranslationService.en
-                            ? TranslationService.ua
-                            : TranslationService.en);
-                  },
-                  splashColor: pinkColor,
                 ),
               ),
+            Image.asset(
+              Images.logo,
+              height: 30,
+              width: 30,
             ),
-          if (trailing != null) trailing,
-        ],
+            if (center != null) center,
+            if (title != null)
+              Text(
+                title,
+                style: Theme.of(context).textTheme.subtitle1,
+              ),
+            if (locale)
+              ClipOval(
+                child: Material(
+                  color: Colors.transparent,
+                  child: IconButton(
+                    icon: Text(
+                      Get.locale == TranslationService.ua
+                          ? en_US['flag']
+                          : ua_UA['flag'],
+                      style: TextStyle(fontSize: 30),
+                    ),
+                    onPressed: () async {
+                      await Get.find<TranslationService>().changeLocale(
+                          Get.locale == TranslationService.en
+                              ? TranslationService.ua
+                              : TranslationService.en);
+                    },
+                    splashColor: pinkColor,
+                  ),
+                ),
+              ),
+            if (trailing != null) trailing,
+          ],
+        ),
       ),
     );
   }

@@ -19,6 +19,7 @@ class SignUpPage extends GetView<SignUpController> {
       child: Scaffold(
         appBar: DefaultAppBar(
           back: true,
+          locale: true,
         ),
         bottomNavigationBar: Padding(
           padding: const EdgeInsets.fromLTRB(30, 0, 30, 50),
