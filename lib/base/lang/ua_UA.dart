@@ -22,4 +22,6 @@ const Map<String, String> ua_UA = {
   userDisabled: "Вас заблоковано.",
   emailInUse: "Цей email вже використовуэться.",
   operarionNotAllowed: "Ця операція заборонена для вас.",
+  unknownError: "Сталася помилка.",
+  wrongPassword: "Не вірний пароль",
 };

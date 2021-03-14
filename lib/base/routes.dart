@@ -9,7 +9,7 @@ abstract class Routes {
   static const home = "/home";
   static const login = "/login";
   static const signup = "/signup";
-  static String restaurantId(String id) {
+  static String restaurantId(String? id) {
     print("/restaurant/$id");
     return "/restaurant/$id";
   }

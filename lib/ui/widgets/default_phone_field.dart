@@ -7,8 +7,8 @@ import 'package:gores/data/models/phone_number.dart';
 import 'package:gores/ui/widgets/phone_field.dart';
 
 class DefaultPhoneField extends StatelessWidget {
-  final void Function(PhoneNumber) onChanged;
-  const DefaultPhoneField({Key key, this.onChanged}) : super(key: key);
+  final void Function(PhoneNumber)? onChanged;
+  const DefaultPhoneField({Key? key, this.onChanged}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class DefaultPhoneField extends StatelessWidget {
         searchText: countrySearch.tr,
         keyboardType: TextInputType.phone,
         dialogDecoration: BoxDecoration(),
-        dialogCountriesStyle: Get.textTheme.bodyText2,
+        dialogCountriesStyle: Get.textTheme!.bodyText2,
         initialCountryCode: 'UA',
         onChanged: onChanged,
       ),

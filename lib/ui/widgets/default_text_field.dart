@@ -3,12 +3,12 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:gores/base/dimensions.dart';
 
 class DefaultTextField extends StatelessWidget {
-  final String hint;
-  final TextEditingController controller;
-  final void Function(String) onChanged;
-  final Widget suffixIcon;
+  final String? hint;
+  final TextEditingController? controller;
+  final void Function(String)? onChanged;
+  final Widget? suffixIcon;
   const DefaultTextField({
-    Key key,
+    Key? key,
     this.hint,
     this.controller,
     this.onChanged,

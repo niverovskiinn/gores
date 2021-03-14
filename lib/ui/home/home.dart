@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:gores/controllers/home_controller.dart';
 import 'package:gores/data/models/price.dart';
 import 'package:gores/data/models/restaurant.dart';
+import 'package:gores/ui/home/widgets/loading_restaurants.dart';
 import 'package:gores/ui/home/widgets/restaurant_item.dart';
 import 'package:gores/ui/widgets/appbar.dart';
 import 'package:gores/ui/widgets/background.dart';
@@ -11,13 +12,23 @@ import 'package:gores/ui/widgets/search_field.dart';
 import 'package:gores/ui/widgets/wrapper.dart';
 
 class HomeScreen extends GetView<HomeController> {
-  const HomeScreen({Key key}) : super(key: key);
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return DefaultBackground(
       child: Scaffold(
         appBar: DefaultAppBar(
+          trailing: NeumorphicButton(
+            style: NeumorphicStyle(
+              color: Colors.transparent,
+              boxShape: NeumorphicBoxShape.circle(),
+            ),
+            child: Icon(Icons.person),
+            onPressed: () {
+              // TODO open preferences
+            },
+          ),
           leading: NeumorphicButton(
             style: NeumorphicStyle(
               boxShape: NeumorphicBoxShape.circle(),
@@ -25,22 +36,26 @@ class HomeScreen extends GetView<HomeController> {
             ),
             child: Icon(Icons.search),
             onPressed: () =>
-                controller.searchVisible = !controller.searchVisible,
+                controller.searchVisible = !controller.searchVisible!,
           ),
         ),
         body: DefaultWrapper(
           child: Obx(
             () => Column(
               children: [
-                if (controller.searchVisible)
+                if (controller.searchVisible!)
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 20.0),
                     child: SearchField(),
                   ),
                 SizedBox(
                   height: MediaQuery.of(context).size.height *
-                      (controller.searchVisible ? .75 : .85),
-                  child: _buildRestList(context),
+                      (controller.searchVisible! ? .75 : .85),
+                  child: controller.restaurants.isEmpty
+                      ? _buildRestList(context, controller.restaurants)
+                      : LoadingRestaurantList(
+                          itemsAmount: 3,
+                        ),
                 ),
               ],
             ),
@@ -52,6 +67,7 @@ class HomeScreen extends GetView<HomeController> {
 
   Widget _buildRestList(
     BuildContext context,
+    List<Restaurant> restaurants,
   ) {
     return ListView.builder(
       itemBuilder: (context, i) {

@@ -4,7 +4,7 @@ import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:gores/base/dimensions.dart';
 
 class SearchField extends StatelessWidget {
-  const SearchField({Key key}) : super(key: key);
+  const SearchField({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,16 +26,16 @@ class SearchField extends StatelessWidget {
               hintText: 'What are you looking for?'),
         ),
         suggestionsCallback: (pattern) async {
-          return;
+          return [];
         },
-        itemBuilder: (context, suggestion) {
+        itemBuilder: (context, dynamic suggestion) {
           return ListTile(
             leading: Icon(Icons.shopping_cart),
             title: Text(suggestion['name']),
             subtitle: Text('\$${suggestion['price']}'),
           );
         },
-        onSuggestionSelected: (suggestion) {
+        onSuggestionSelected: (dynamic suggestion) {
           print(suggestion);
         },
       ),

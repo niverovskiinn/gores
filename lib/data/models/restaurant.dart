@@ -1,22 +1,42 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:equatable/equatable.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 import 'price.dart';
 
-part 'restaurant.freezed.dart';
 part 'restaurant.g.dart';
 
-@freezed
-abstract class Restaurant with _$Restaurant {
-  factory Restaurant({
-    String id,
-    String name,
-    double rating,
-    String description,
-    String titleImageUrl,
-    List<String> imageUrls,
-    Price price,
-  }) = _Restaurant;
+@JsonSerializable()
+class Restaurant extends Equatable {
+  final String? id;
+  final String? name;
+  final String? description;
+  final String? titleImageUrl;
+  final double? rating;
+  final Price? price;
+  final List<String>? imageUrls;
+  Restaurant({
+    this.id,
+    this.name,
+    this.description,
+    this.titleImageUrl,
+    this.rating,
+    this.price,
+    this.imageUrls,
+  });
 
+  @override
+  List<Object?> get props => [
+        this.id,
+        this.name,
+        this.description,
+        this.titleImageUrl,
+        this.rating,
+        this.price,
+        this.imageUrls,
+      ];
+  @override
+  bool? get stringify => true;
   factory Restaurant.fromJson(Map<String, dynamic> json) =>
       _$RestaurantFromJson(json);
+  Map<String, dynamic> toJson() => _$RestaurantToJson(this);
 }

@@ -21,7 +21,7 @@ class TranslationService extends Translations {
     final _sharedPreferences = await SharedPreferences.getInstance();
 
     await _sharedPreferences.setString("languageCode", locale.languageCode);
-    await _sharedPreferences.setString("countryCode", locale.countryCode);
+    await _sharedPreferences.setString("countryCode", locale.countryCode!);
 
     Get.updateLocale(locale);
   }

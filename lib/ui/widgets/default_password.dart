@@ -3,11 +3,11 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:gores/base/dimensions.dart';
 
 class DefaultPassword extends StatefulWidget {
-  final String hint;
-  final TextEditingController controller;
-  final void Function(String) onChanged;
+  final String? hint;
+  final TextEditingController? controller;
+  final void Function(String)? onChanged;
   const DefaultPassword({
-    Key key,
+    Key? key,
     this.hint,
     this.controller,
     this.onChanged,

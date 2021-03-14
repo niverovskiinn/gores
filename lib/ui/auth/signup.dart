@@ -46,7 +46,7 @@ class SignUpPage extends GetView<SignUpController> {
               ),
               Text(
                 signUp.tr,
-                style: Get.textTheme.headline3,
+                style: Get.textTheme!.headline3,
               ),
               SizedBox(
                 height: verticalDefaultSize,

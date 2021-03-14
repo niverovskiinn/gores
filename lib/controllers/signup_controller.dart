@@ -4,51 +4,49 @@ import 'package:get/get.dart';
 import 'package:gores/base/lang/en_US.dart';
 import 'package:gores/controllers/auth_controller.dart';
 import 'package:gores/utils/snackbars.dart';
-import 'package:meta/meta.dart';
 
 class SignUpController extends GetxController {
   final AuthController authController;
-  SignUpController({@required this.authController})
-      : assert(authController != null);
+  SignUpController({required this.authController});
 
   final _email = ''.obs;
-  set email(String value) => this._email.value = value;
-  String get email => this._email.value;
+  set email(String? value) => this._email.value = value;
+  String? get email => this._email.value;
 
   final _phone = ''.obs;
-  set phone(String value) => this._phone.value = value;
-  String get phone => this._phone.value;
+  set phone(String? value) => this._phone.value = value;
+  String? get phone => this._phone.value;
 
   final _password = ''.obs;
-  set password(String value) => this._password.value = value;
-  String get password => this._password.value;
+  set password(String? value) => this._password.value = value;
+  String? get password => this._password.value;
 
   final _name = ''.obs;
-  set name(String value) => this._name.value = value;
-  String get name => this._name.value;
+  set name(String? value) => this._name.value = value;
+  String? get name => this._name.value;
 
   final _confPassword = ''.obs;
-  set confPassword(String value) => this._confPassword.value = value;
-  String get confPassword => this._confPassword.value;
+  set confPassword(String? value) => this._confPassword.value = value;
+  String? get confPassword => this._confPassword.value;
 
   Future<bool> signUp() async {
     if (_validate()) {
       return await authController.createUser(
-        email: email,
-        password: password,
-        name: name,
-        phone: phone,
+        email!,
+        password!,
+        name,
+        phone,
       );
     }
     return false;
   }
 
   bool _validate() {
-    if (name.isEmpty) {
+    if (name!.isEmpty) {
       snackbarError(error.tr, emptyName.tr);
       return false;
     }
-    if (email.isEmpty || !email.isEmail) {
+    if (email!.isEmpty || !email!.isEmail) {
       snackbarError(error.tr, badEmail.tr);
       return false;
     }
@@ -64,7 +62,7 @@ class SignUpController extends GetxController {
     return true;
   }
 
-  bool _validatePassword(String password, [int minLength = 8]) {
+  bool _validatePassword(String? password, [int minLength = 8]) {
     if (password == null || password.isEmpty) {
       return false;
     }

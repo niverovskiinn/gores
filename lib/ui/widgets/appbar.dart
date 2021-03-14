@@ -8,14 +8,14 @@ import 'package:gores/base/lang/ua_UA.dart';
 import 'package:gores/base/style.dart';
 
 class DefaultAppBar extends StatelessWidget with PreferredSizeWidget {
-  final Widget leading;
-  final Widget trailing;
-  final Widget center;
-  final String title;
+  final Widget? leading;
+  final Widget? trailing;
+  final Widget? center;
+  final String? title;
   final bool back;
   final bool locale;
   DefaultAppBar({
-    Key key,
+    Key? key,
     this.leading,
     this.trailing,
     this.title,
@@ -44,7 +44,7 @@ class DefaultAppBar extends StatelessWidget with PreferredSizeWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            if (leading != null) leading,
+            if (leading != null) leading!,
             if (back)
               ClipOval(
                 child: Material(
@@ -61,10 +61,10 @@ class DefaultAppBar extends StatelessWidget with PreferredSizeWidget {
               height: 30,
               width: 30,
             ),
-            if (center != null) center,
+            if (center != null) center!,
             if (title != null)
               Text(
-                title,
+                title!,
                 style: Theme.of(context).textTheme.subtitle1,
               ),
             if (locale)
@@ -74,8 +74,8 @@ class DefaultAppBar extends StatelessWidget with PreferredSizeWidget {
                   child: IconButton(
                     icon: Text(
                       Get.locale == TranslationService.ua
-                          ? en_US['flag']
-                          : ua_UA['flag'],
+                          ? en_US['flag']!
+                          : ua_UA['flag']!,
                       style: TextStyle(fontSize: 30),
                     ),
                     onPressed: () async {
@@ -88,7 +88,7 @@ class DefaultAppBar extends StatelessWidget with PreferredSizeWidget {
                   ),
                 ),
               ),
-            if (trailing != null) trailing,
+            if (trailing != null) trailing!,
           ],
         ),
       ),

@@ -12,14 +12,14 @@ class AuthController extends GetxController {
   FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
   Future<bool> createUser(
-      {String email, String password, String name, String phone}) async {
+      String email, String password, String? name, String? phone) async {
     try {
       final userCred = await _firebaseAuth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
       final profile = Profile(
-        id: userCred.user.uid,
+        id: userCred.user!.uid,
         name: name,
         phone: phone,
         email: email,
@@ -27,8 +27,11 @@ class AuthController extends GetxController {
       await Database.instance.createProfile(profile);
       Get.find<ProfileController>().profile = profile;
       return true;
+    } on FirebaseAuthException catch (e) {
+      snackbarError(error.tr, e.message ?? unknownError.tr);
+      return false;
     } catch (e) {
-      snackbarError(error.tr, e.message);
+      snackbarError(error.tr, unknownError.tr);
       return false;
     }
   }
@@ -43,10 +46,15 @@ class AuthController extends GetxController {
     } on FirebaseAuthException catch (e) {
       _proccessException(e);
       return false;
+    } catch (e) {
+      snackbarError(error.tr, unknownError.tr);
+      return false;
     }
   }
 
   void _proccessException(FirebaseAuthException ex) {
+    log(ex.code);
+
     switch (ex.code) {
       case 'invalid-email':
         snackbarError(error.tr, badEmail.tr);
@@ -66,17 +74,22 @@ class AuthController extends GetxController {
       case 'user-not-found':
         snackbarError(error.tr, userNotFound.tr);
         break;
+      case 'wrong-password':
+        snackbarError(error.tr, userNotFound.tr);
+        break;
       default:
         log(ex.code);
-        snackbarError(error.tr, ex.message);
+        snackbarError(error.tr, ex.message ?? unknownError.tr);
     }
   }
 
   void logout() async {
     try {
       await _firebaseAuth.signOut();
+    } on FirebaseAuthException catch (e) {
+      snackbarError(error.tr, e.message ?? unknownError.tr);
     } catch (e) {
-      snackbarError(error.tr, e.message);
+      snackbarError(error.tr, unknownError.tr);
     }
   }
 

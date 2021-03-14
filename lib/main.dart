@@ -14,7 +14,6 @@ void main() async {
 
   //Firebase init
   await Firebase.initializeApp();
-
   runApp(MyApp());
 }
 
@@ -46,7 +45,7 @@ class MyApp extends StatelessWidget {
 }
 
 class Root extends StatelessWidget {
-  Root({Key key}) : super(key: key);
+  Root({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

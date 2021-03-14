@@ -3,7 +3,7 @@ import 'package:gores/base/dimensions.dart';
 
 class DefaultWrapper extends StatelessWidget {
   final Widget child;
-  const DefaultWrapper({Key key, @required this.child}) : super(key: key);
+  const DefaultWrapper({Key? key, required this.child}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -10,8 +10,8 @@ import 'package:gores/data/models/restaurant.dart';
 class RestaurantItem extends StatelessWidget {
   final Restaurant item;
   const RestaurantItem({
-    Key key,
-    @required this.item,
+    Key? key,
+    required this.item,
   }) : super(key: key);
 
   @override
@@ -35,7 +35,7 @@ class RestaurantItem extends StatelessWidget {
               Expanded(
                   flex: 3,
                   child: Image.network(
-                    item.titleImageUrl,
+                    item.titleImageUrl!,
                     fit: BoxFit.fitHeight,
                   )),
               Expanded(
@@ -46,26 +46,26 @@ class RestaurantItem extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        item.name,
-                        style: Get.textTheme.headline6,
+                        item.name!,
+                        style: Get.textTheme!.headline6,
                         maxLines: 3,
                         overflow: TextOverflow.ellipsis,
                       ),
                       Text(
-                        item.description,
-                        style: Get.textTheme.bodyText1
+                        item.description!,
+                        style: Get.textTheme!.bodyText1!
                             .copyWith(color: Colors.grey),
                         maxLines: 4,
                         overflow: TextOverflow.ellipsis,
                       ),
                       RatingBarIndicator(
-                        rating: item.rating,
+                        rating: item.rating!,
                         itemBuilder: (context, index) => Icon(
                           Icons.star,
                           color: pinkColor,
                         ),
                         itemCount: 5,
-                        itemSize: constraints.maxWidth * .06,
+                        itemSize: 15,
                         direction: Axis.horizontal,
                       ),
                       _buildPrice(item.price),
@@ -80,8 +80,8 @@ class RestaurantItem extends StatelessWidget {
     );
   }
 
-  Widget _buildPrice(Price price) {
-    double selected;
+  Widget _buildPrice(Price? price) {
+    late double selected;
     switch (price) {
       case Price.low:
         selected = 1;
@@ -94,6 +94,9 @@ class RestaurantItem extends StatelessWidget {
         break;
       case Price.cosmos:
         selected = 4;
+        break;
+      default:
+        selected = 0;
     }
     return RatingBarIndicator(
       rating: selected,

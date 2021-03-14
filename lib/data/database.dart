@@ -19,6 +19,6 @@ class Database {
 
   Future<Profile> getProfile(String id) async {
     final doc = await _db.collection(users).doc(id).get();
-    return Profile.fromJson(doc.data());
+    return Profile.fromJson(doc.data()!);
   }
 }

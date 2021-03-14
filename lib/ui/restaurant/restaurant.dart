@@ -9,7 +9,7 @@ import 'package:gores/ui/widgets/wrapper.dart';
 class RestaurantPage extends GetView<RestaurantController> {
   @override
   Widget build(BuildContext context) {
-    final restaurant = Get.arguments as Restaurant;
+    final restaurant = Get.arguments as Restaurant?;
     print(restaurant);
     return DefaultBackground(
       child: Scaffold(

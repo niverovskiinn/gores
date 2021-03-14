@@ -4,11 +4,11 @@ import 'package:get/get.dart';
 import 'package:gores/base/dimensions.dart';
 
 class DefaultButton extends StatelessWidget {
-  final String title;
-  final void Function() onTap;
-  final EdgeInsets margin;
+  final String? title;
+  final void Function()? onTap;
+  final EdgeInsets? margin;
   const DefaultButton({
-    Key key,
+    Key? key,
     this.title,
     this.onTap,
     this.margin,
@@ -30,9 +30,9 @@ class DefaultButton extends StatelessWidget {
       ),
       onPressed: onTap,
       child: Text(
-        title,
+        title!,
         textAlign: TextAlign.center,
-        style: Get.textTheme.button.copyWith(
+        style: Get.textTheme!.button!.copyWith(
           color: Colors.black45,
         ),
       ),

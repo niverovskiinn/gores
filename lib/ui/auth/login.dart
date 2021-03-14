@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart' show kIsWeb;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:get/get.dart';
@@ -41,31 +43,35 @@ class LoginPage extends GetView<LoginController> {
           ),
         ),
         body: DefaultWrapper(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: topSpace,
-              ),
-              Text(
-                authorization.tr,
-                style: Get.textTheme.headline3,
-              ),
-              SizedBox(
-                height: verticalDefaultSize,
-              ),
-              DefaultTextField(
-                hint: email.tr,
-                onChanged: (value) => controller.email = value,
-              ),
-              SizedBox(
-                height: verticalDefaultSize,
-              ),
-              DefaultPassword(
-                hint: password.tr,
-                onChanged: (value) => controller.password = value,
-              ),
-            ],
+          child: ConstrainedBox(
+            constraints: BoxConstraints(maxWidth: 400),
+            child: Column(
+              crossAxisAlignment:
+                  kIsWeb ? CrossAxisAlignment.center : CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: topSpace,
+                ),
+                Text(
+                  authorization.tr,
+                  style: Get.textTheme!.headline3,
+                ),
+                SizedBox(
+                  height: verticalDefaultSize,
+                ),
+                DefaultTextField(
+                  hint: email.tr,
+                  onChanged: (value) => controller.email = value,
+                ),
+                SizedBox(
+                  height: verticalDefaultSize,
+                ),
+                DefaultPassword(
+                  hint: password.tr,
+                  onChanged: (value) => controller.password = value,
+                ),
+              ],
+            ),
           ),
         ),
       ),

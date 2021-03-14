@@ -7,6 +7,7 @@ const emptyEmailPassword = "emptyEmailPassword";
 const email = "email";
 const badEmail = "badEmail";
 const userNotFound = "userNotFound";
+const wrongPassword = "wrongPassword";
 const signUp = "signUp";
 const name = "name";
 const confirmPassword = "confirmPassword";
@@ -18,6 +19,8 @@ const countrySearch = "countrySearch";
 const userDisabled = "userDisabled";
 const emailInUse = "emailInUse";
 const operarionNotAllowed = "operarionNotAllowed";
+const unknownError = "unknownError";
+
 const Map<String, String> en_US = {
   flag: "🇺🇸",
   error: "Error",
@@ -40,4 +43,6 @@ const Map<String, String> en_US = {
   userDisabled: "You're banned.",
   emailInUse: "This email already in use.",
   operarionNotAllowed: "This operation not allowed for this credentials.",
+  unknownError: "Unknown error happened.",
+  wrongPassword: "Wrong password",
 };
