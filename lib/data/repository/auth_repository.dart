@@ -1,18 +1,26 @@
 import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:gores/base/lang/en_US.dart';
+import 'package:gores/base/routes.dart';
 import 'package:gores/controllers/profile_controller.dart';
 import 'package:gores/data/database.dart';
 import 'package:gores/data/models/profile.dart';
+import 'package:gores/data/models/roles.dart';
 import 'package:gores/utils/snackbars.dart';
 
-class AuthController extends GetxController {
+class AuthRepository {
   FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
 
   Future<bool> createUser(
-      String email, String password, String? name, String? phone) async {
+    String email,
+    String password,
+    String? name,
+    String? phone,
+    Roles role,
+  ) async {
     try {
       final userCred = await _firebaseAuth.createUserWithEmailAndPassword(
         email: email,
@@ -23,9 +31,20 @@ class AuthController extends GetxController {
         name: name,
         phone: phone,
         email: email,
+        role: role,
       );
       await Database.instance.createProfile(profile);
-      Get.find<ProfileController>().profile = profile;
+      if (userCred.user != null) {
+        final profile = await Database.instance.getProfile(userCred.user!.uid);
+        if (profile != null &&
+            (!kIsWeb && profile.role == Roles.admin ||
+                kIsWeb && profile.role == Roles.user)) {
+          logout();
+          return false;
+        }
+        Get.find<ProfileController>().profile = profile;
+        return true;
+      }
       return true;
     } on FirebaseAuthException catch (e) {
       snackbarError(error.tr, e.message ?? unknownError.tr);
@@ -38,11 +57,22 @@ class AuthController extends GetxController {
 
   Future<bool> login(String email, String password) async {
     try {
-      await _firebaseAuth.signInWithEmailAndPassword(
+      final userCred = await _firebaseAuth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
-      return true;
+      if (userCred.user != null) {
+        final profile = await Database.instance.getProfile(userCred.user!.uid);
+        //TODO if (profile != null &&
+        //     (!kIsWeb && profile.role == Roles.admin ||
+        //         kIsWeb && profile.role == Roles.user)) {
+        //   logout();
+        //   return false;
+        // }
+        Get.find<ProfileController>().profile = profile;
+        return true;
+      }
+      return false;
     } on FirebaseAuthException catch (e) {
       _proccessException(e);
       return false;
@@ -86,12 +116,15 @@ class AuthController extends GetxController {
   void logout() async {
     try {
       await _firebaseAuth.signOut();
+      Get.offAllNamed(Routes.login);
     } on FirebaseAuthException catch (e) {
       snackbarError(error.tr, e.message ?? unknownError.tr);
     } catch (e) {
       snackbarError(error.tr, unknownError.tr);
     }
   }
+
+  User? get currentUser => _firebaseAuth.currentUser;
 
   bool isLoggedIn() {
     return _firebaseAuth.currentUser != null;

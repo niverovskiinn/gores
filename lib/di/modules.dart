@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
-import 'package:gores/controllers/auth_controller.dart';
+import 'package:gores/controllers/admin_home_controller.dart';
+import 'package:gores/data/repository/admin_repository.dart';
+import 'package:gores/data/repository/auth_repository.dart';
 import 'package:gores/controllers/home_controller.dart';
 import 'package:gores/controllers/login_controller.dart';
 import 'package:gores/controllers/profile_controller.dart';
@@ -10,12 +12,15 @@ import 'package:gores/data/database.dart';
 class InitialBinding implements Bindings {
   @override
   void dependencies() {
-    Get.lazyPut<AuthController>(() => AuthController());
+    Get.lazyPut<AuthRepository>(() => AuthRepository());
+    Get.lazyPut<AdminRepository>(() => AdminRepository(Get.find()));
     Get.lazyPut<ProfileController>(() => ProfileController());
     Get.lazyPut<LoginController>(
-        () => LoginController(authController: Get.find()));
+        () => LoginController(authRepository: Get.find()));
     Get.lazyPut<HomeController>(() => HomeController(Database.instance));
     Get.lazyPut<SignUpController>(
-        () => SignUpController(authController: Get.find()));
+        () => SignUpController(authRepository: Get.find()));
+    Get.lazyPut<AdminHomeController>(
+        () => AdminHomeController(Get.find(), Get.find()));
   }
 }

@@ -13,6 +13,7 @@ import 'package:gores/ui/widgets/default_button.dart';
 import 'package:gores/ui/widgets/default_password.dart';
 import 'package:gores/ui/widgets/default_text_field.dart';
 import 'package:gores/ui/widgets/wrapper.dart';
+import 'package:gores/utils/snackbars.dart';
 
 class LoginPage extends GetView<LoginController> {
   @override
@@ -33,9 +34,7 @@ class LoginPage extends GetView<LoginController> {
               Spacer(),
               DefaultButton(
                 onTap: () async {
-                  if (await controller.next()) {
-                    Get.offAllNamed(Routes.home);
-                  }
+                  await controller.next();
                 },
                 title: next.tr.toUpperCase(),
               ),
@@ -43,34 +42,35 @@ class LoginPage extends GetView<LoginController> {
           ),
         ),
         body: DefaultWrapper(
-          child: ConstrainedBox(
-            constraints: BoxConstraints(maxWidth: 400),
-            child: Column(
-              crossAxisAlignment:
-                  kIsWeb ? CrossAxisAlignment.center : CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  height: topSpace,
-                ),
-                Text(
-                  authorization.tr,
-                  style: Get.textTheme!.headline3,
-                ),
-                SizedBox(
-                  height: verticalDefaultSize,
-                ),
-                DefaultTextField(
-                  hint: email.tr,
-                  onChanged: (value) => controller.email = value,
-                ),
-                SizedBox(
-                  height: verticalDefaultSize,
-                ),
-                DefaultPassword(
-                  hint: password.tr,
-                  onChanged: (value) => controller.password = value,
-                ),
-              ],
+          child: Center(
+            child: SizedBox(
+              width: 400,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    height: kIsWeb ? webTopSpace : mobileTopSpace,
+                  ),
+                  Text(
+                    authorization.tr,
+                    style: Get.textTheme!.headline3,
+                  ),
+                  SizedBox(
+                    height: verticalDefaultSize,
+                  ),
+                  DefaultTextField(
+                    hint: email.tr,
+                    onChanged: (value) => controller.email = value,
+                  ),
+                  SizedBox(
+                    height: verticalDefaultSize,
+                  ),
+                  DefaultPassword(
+                    hint: password.tr,
+                    onChanged: (value) => controller.password = value,
+                  ),
+                ],
+              ),
             ),
           ),
         ),

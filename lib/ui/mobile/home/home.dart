@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:get/get.dart';
+import 'package:gores/data/repository/auth_repository.dart';
 import 'package:gores/controllers/home_controller.dart';
 import 'package:gores/data/models/price.dart';
 import 'package:gores/data/models/restaurant.dart';
-import 'package:gores/ui/home/widgets/loading_restaurants.dart';
-import 'package:gores/ui/home/widgets/restaurant_item.dart';
+import 'package:gores/ui/mobile/home/widgets/loading_restaurants.dart';
+import 'package:gores/ui/mobile/home/widgets/restaurant_item.dart';
 import 'package:gores/ui/widgets/appbar.dart';
 import 'package:gores/ui/widgets/background.dart';
 import 'package:gores/ui/widgets/search_field.dart';
@@ -26,7 +27,7 @@ class HomeScreen extends GetView<HomeController> {
             ),
             child: Icon(Icons.person),
             onPressed: () {
-              // TODO open preferences
+              Get.find<AuthRepository>().logout();
             },
           ),
           leading: NeumorphicButton(
@@ -62,6 +63,18 @@ class HomeScreen extends GetView<HomeController> {
           ),
         ),
       ),
+    );
+  }
+  // TODO
+
+  Widget _buildWide(
+    BuildContext context,
+    List<Restaurant> restaurants,
+  ) {
+    return GridView.builder(
+      gridDelegate:
+          SliverGridDelegateWithMaxCrossAxisExtent(maxCrossAxisExtent: 3),
+      itemBuilder: (context, i) => SizedBox(),
     );
   }
 

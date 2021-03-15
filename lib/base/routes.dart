@@ -1,16 +1,17 @@
 import 'package:get/get.dart';
 import 'package:gores/ui/auth/login.dart';
 import 'package:gores/ui/auth/signup.dart';
-import 'package:gores/ui/home/home.dart';
-import 'package:gores/ui/restaurant/restaurant.dart';
+import 'package:gores/ui/mobile/home/home.dart';
+import 'package:gores/ui/mobile/restaurant/restaurant.dart';
+import 'package:gores/ui/web/admin_home/admin_home.dart';
 
 // https://github.com/jonataslaw/getx/blob/master/documentation/en_US/route_management.md
 abstract class Routes {
   static const home = "/home";
   static const login = "/login";
   static const signup = "/signup";
+  static const adminHome = "/adminHome";
   static String restaurantId(String? id) {
-    print("/restaurant/$id");
     return "/restaurant/$id";
   }
 }
@@ -31,5 +32,9 @@ final getPages = [
   GetPage(
     name: Routes.signup,
     page: () => SignUpPage(),
+  ),
+  GetPage(
+    name: Routes.adminHome,
+    page: () => AdminHomePage(),
   ),
 ];

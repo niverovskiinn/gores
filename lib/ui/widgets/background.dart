@@ -9,6 +9,7 @@ class DefaultBackground extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       constraints: BoxConstraints.expand(),
+      alignment: Alignment.center,
       decoration: BoxDecoration(
         color: aquamarineColor,
         // gradient: LinearGradient(

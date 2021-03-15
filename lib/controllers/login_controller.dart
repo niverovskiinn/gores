@@ -1,12 +1,14 @@
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:gores/base/lang/en_US.dart';
-import 'package:gores/controllers/auth_controller.dart';
+import 'package:gores/base/routes.dart';
+import 'package:gores/data/repository/auth_repository.dart';
 import 'package:gores/utils/snackbars.dart';
 
 class LoginController extends GetxController {
-  final AuthController authController;
+  final AuthRepository authRepository;
   LoginController({
-    required this.authController,
+    required this.authRepository,
   });
 
   final _email = ''.obs;
@@ -17,11 +19,19 @@ class LoginController extends GetxController {
   set password(String? value) => this._password.value = value;
   String? get password => this._password.value;
 
-  Future<bool> next() async {
+  Future<void> next() async {
     if (_validate()) {
-      return await authController.login(email!, password!);
+      final res = await authRepository.login(email!, password!);
+      if (res) {
+        Get.offAllNamed(
+            //TODO kIsWeb ?
+            Routes.adminHome
+            // : Routes.home
+            );
+      } else {
+        snackbarError(error.tr, unknownError.tr);
+      }
     }
-    return false;
   }
 
   bool _validate() {

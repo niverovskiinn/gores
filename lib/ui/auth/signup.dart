@@ -1,9 +1,11 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gores/base/dimensions.dart';
 import 'package:gores/base/lang/en_US.dart';
 import 'package:gores/base/routes.dart';
 import 'package:gores/controllers/signup_controller.dart';
+import 'package:gores/data/models/roles.dart';
 import 'package:gores/ui/widgets/appbar.dart';
 import 'package:gores/ui/widgets/background.dart';
 import 'package:gores/ui/widgets/default_button.dart';
@@ -28,9 +30,7 @@ class SignUpPage extends GetView<SignUpController> {
               Spacer(),
               DefaultButton(
                 onTap: () async {
-                  if (await controller.signUp()) {
-                    Get.offAllNamed(Routes.home);
-                  }
+                  await controller.signUp();
                 },
                 title: next.tr.toUpperCase(),
               ),
@@ -38,51 +38,64 @@ class SignUpPage extends GetView<SignUpController> {
           ),
         ),
         body: DefaultWrapper(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: topSpace,
+          child: Center(
+            child: SizedBox(
+              width: 400,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    height: kIsWeb ? webTopSpace : mobileTopSpace,
+                  ),
+                  Text(
+                    signUp.tr,
+                    style: Get.textTheme!.headline3,
+                  ),
+                  SizedBox(
+                    height: verticalDefaultSize,
+                  ),
+                  Text(
+                    kIsWeb ? addRest.tr : joinUs.tr,
+                    style: Get.textTheme!.headline6,
+                  ),
+                  SizedBox(
+                    height: verticalDefaultSize,
+                  ),
+                  DefaultTextField(
+                    hint: name.tr,
+                    onChanged: (value) => controller.name = value,
+                  ),
+                  SizedBox(
+                    height: verticalDefaultSize,
+                  ),
+                  DefaultTextField(
+                    hint: email.tr,
+                    onChanged: (value) => controller.email = value,
+                  ),
+                  SizedBox(
+                    height: verticalDefaultSize,
+                  ),
+                  DefaultPhoneField(
+                    onChanged: (value) =>
+                        controller.phone = value.completeNumber,
+                  ),
+                  SizedBox(
+                    height: verticalDefaultSize,
+                  ),
+                  DefaultPassword(
+                    hint: password.tr,
+                    onChanged: (value) => controller.password = value,
+                  ),
+                  SizedBox(
+                    height: verticalDefaultSize,
+                  ),
+                  DefaultPassword(
+                    hint: confirmPassword.tr,
+                    onChanged: (value) => controller.confPassword = value,
+                  ),
+                ],
               ),
-              Text(
-                signUp.tr,
-                style: Get.textTheme!.headline3,
-              ),
-              SizedBox(
-                height: verticalDefaultSize,
-              ),
-              DefaultTextField(
-                hint: name.tr,
-                onChanged: (value) => controller.name = value,
-              ),
-              SizedBox(
-                height: verticalDefaultSize,
-              ),
-              DefaultTextField(
-                hint: email.tr,
-                onChanged: (value) => controller.email = value,
-              ),
-              SizedBox(
-                height: verticalDefaultSize,
-              ),
-              DefaultPhoneField(
-                onChanged: (value) => controller.phone = value.completeNumber,
-              ),
-              SizedBox(
-                height: verticalDefaultSize,
-              ),
-              DefaultPassword(
-                hint: password.tr,
-                onChanged: (value) => controller.password = value,
-              ),
-              SizedBox(
-                height: verticalDefaultSize,
-              ),
-              DefaultPassword(
-                hint: confirmPassword.tr,
-                onChanged: (value) => controller.confPassword = value,
-              ),
-            ],
+            ),
           ),
         ),
       ),

@@ -12,7 +12,8 @@ class HomeController extends GetxController {
   bool? get searchVisible => this._searchVisible.value;
 
   var _restaurants = <Restaurant>[].obs;
-  set restaurants(List<Restaurant> value) => this._restaurants = value as RxList<Restaurant>;
+  set restaurants(List<Restaurant> value) =>
+      this._restaurants = value as RxList<Restaurant>;
   List<Restaurant> get restaurants => this._restaurants;
 
   @override

@@ -20,6 +20,9 @@ const userDisabled = "userDisabled";
 const emailInUse = "emailInUse";
 const operarionNotAllowed = "operarionNotAllowed";
 const unknownError = "unknownError";
+const addRest = "addRest";
+const joinUs = "joinUs";
+const unknown = "unknown";
 
 const Map<String, String> en_US = {
   flag: "🇺🇸",
@@ -45,4 +48,7 @@ const Map<String, String> en_US = {
   operarionNotAllowed: "This operation not allowed for this credentials.",
   unknownError: "Unknown error happened.",
   wrongPassword: "Wrong password",
+  addRest: "Add your restaurant to our system.",
+  joinUs: "Join to our platform, where you can reserve tables in restaurants.",
+  unknown: "Unknown",
 };

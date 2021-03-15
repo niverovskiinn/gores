@@ -1,13 +1,16 @@
 import 'dart:developer';
 
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:gores/base/lang/en_US.dart';
-import 'package:gores/controllers/auth_controller.dart';
+import 'package:gores/base/routes.dart';
+import 'package:gores/data/repository/auth_repository.dart';
+import 'package:gores/data/models/roles.dart';
 import 'package:gores/utils/snackbars.dart';
 
 class SignUpController extends GetxController {
-  final AuthController authController;
-  SignUpController({required this.authController});
+  final AuthRepository authRepository;
+  SignUpController({required this.authRepository});
 
   final _email = ''.obs;
   set email(String? value) => this._email.value = value;
@@ -29,16 +32,21 @@ class SignUpController extends GetxController {
   set confPassword(String? value) => this._confPassword.value = value;
   String? get confPassword => this._confPassword.value;
 
-  Future<bool> signUp() async {
+  Future<void> signUp() async {
     if (_validate()) {
-      return await authController.createUser(
+      final res = await authRepository.createUser(
         email!,
         password!,
         name,
         phone,
+        kIsWeb ? Roles.admin : Roles.user,
       );
+      if (res) {
+        Get.offAllNamed(kIsWeb ? Routes.adminHome : Routes.home);
+      } else {
+        snackbarError(error.tr, unknownError.tr);
+      }
     }
-    return false;
   }
 
   bool _validate() {
