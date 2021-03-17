@@ -65,18 +65,6 @@ class HomeScreen extends GetView<HomeController> {
       ),
     );
   }
-  // TODO
-
-  Widget _buildWide(
-    BuildContext context,
-    List<Restaurant> restaurants,
-  ) {
-    return GridView.builder(
-      gridDelegate:
-          SliverGridDelegateWithMaxCrossAxisExtent(maxCrossAxisExtent: 3),
-      itemBuilder: (context, i) => SizedBox(),
-    );
-  }
 
   Widget _buildRestList(
     BuildContext context,

@@ -25,8 +25,10 @@ dependencies:
     sdk: flutter
   cloud_firestore: ^1.0.1
   cupertino_icons: ^1.0.0
+  file_picker: ^3.0.0
   firebase_auth: ^1.0.1
   firebase_core: ^1.0.1
+  firebase_storage: ^8.0.0
   flutter_neumorphic: ^3.1.0
   flutter_svg: 0.21.0-nullsafety.0
   flutter_typeahead: ^3.0.0-nullsafety.0 
