@@ -14,6 +14,7 @@ class AdminHomeController extends GetxController {
     _restaurants.bindStream(await _adminRepository.getRestaurants());
   }
 
+//TODO use Uuid for rest id
   var _restaurants = <Restaurant?>[].obs;
   set restaurants(List<Restaurant?> value) =>
       this._restaurants = value as RxList<Restaurant?>;

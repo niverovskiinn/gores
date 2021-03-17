@@ -9,35 +9,34 @@ class FileStorageManager {
 
   final _storage = FirebaseStorage.instance.ref();
 
-  Future<List<PlatformFile>> uploadPlatformFiles(
+  Future<List<String>> uploadPlatformFiles(
     List<PlatformFile> files, {
     required String path,
   }) async {
-  
-    final addedFiles = <PlatformFile>[];
+    final addedUrls = <String>[];
     try {
-      files.forEach(
-        (file) async {
-          if (file.bytes != null && file.name != null) {
-            await _storage.child(path + file.name!).putData(file.bytes!);
-            addedFiles.add(file);
-          }
-        },
-      );
+      for (var file in files) {
+        if (file.bytes != null && file.name != null) {
+          final uploaded =
+              await _storage.child(path + file.name!).putData(file.bytes!);
+          addedUrls.add(await uploaded.ref.getDownloadURL());
+        }
+      }
     } on FirebaseException catch (e) {
       log(e.toString());
     }
-    return addedFiles;
+    return addedUrls;
   }
 
-  Future<PlatformFile?> uploadPlatformFile(
+  Future<String?> uploadPlatformFile(
     PlatformFile file, {
     required String path,
   }) async {
     try {
       if (file.bytes != null && file.name != null) {
-        await _storage.child(path + file.name!).putData(file.bytes!);
-        return file;
+        final uploaded =
+            await _storage.child(path + file.name!).putData(file.bytes!);
+        return uploaded.ref.getDownloadURL();
       }
     } on FirebaseException catch (e) {
       log(e.toString());

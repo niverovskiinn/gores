@@ -1,3 +1,5 @@
+import 'package:uuid/uuid.dart';
+
 import 'package:gores/data/database.dart';
 import 'package:gores/data/file_picker_manager.dart';
 import 'package:gores/data/file_storage_manager.dart';
@@ -19,21 +21,41 @@ class AdminRepository {
     return Stream.empty();
   }
 
+  Future<void> addRestaurant(Restaurant restaurant) async {
+    // look transactions
+    //https://firebase.flutter.dev/docs/firestore/usage#transactions
+    if (_authRepository.isLoggedIn()) {
+      await _db.addRestaurant(restaurant);
+      final rests = await (await getRestaurants()).first;
+      final res = <String>[];
+      rests.forEach((r) {
+        if (r != null && r.id != null) {
+          res.add(r.id!);
+        }
+      });
+      await _db.updateAdminRestaurants(_authRepository.currentUser!.uid, res);
+    }
+  }
+
+  Future<void> rRestaurant(Restaurant restaurant) async {
+    await _db.addRestaurant(restaurant);
+  }
+
+  Future<void> updateRestaurant(String id, Restaurant restaurant) async {}
+
   Future<String?> pickTitleImage(String restId) async {
     final file = await _filePicker.singleImage();
     if (file != null) {
       final path =
           "${FileStorageManager.images}/$restId/${FileStorageManager.titleImage}/";
-
-      final res = await _fileStorage.uploadPlatformFile(file, path: path);
-      return res != null ? path + file.name! : null;
+      return await _fileStorage.uploadPlatformFile(file, path: path);
     }
   }
 
-  Future<List<String?>> pickImages(String restId) async {
+  Future<List<String>> pickImages(String restId) async {
     final files = await _filePicker.multipleImages();
     final path = "${FileStorageManager.images}/$restId/";
-    final res = await _fileStorage.uploadPlatformFiles(files, path: path);
-    return files.map((e) => e.name != null ? (path + e.name!) : null).toList();
+    final urls = await _fileStorage.uploadPlatformFiles(files, path: path);
+    return urls;
   }
 }

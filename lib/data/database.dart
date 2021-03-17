@@ -32,6 +32,15 @@ class Database {
     await _db.collection(restaurants).add(restaurant.toJson());
   }
 
+  Future<void> updateAdminRestaurants(
+      String userId, List<String> restIds) async {
+    await _db.collection(users).doc(userId).update({restaurants: restIds});
+  }
+
+  Future<void> updateRestaurant(String id, Restaurant restaurant) async {
+    await _db.collection(restaurants).doc(id).update(restaurant.toJson());
+  }
+
   Future<List<Restaurant>> getRestaurants() async {
     final doc = await _db.collection(restaurants).get();
     final docs = doc.docs;

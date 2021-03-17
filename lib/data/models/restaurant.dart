@@ -13,6 +13,7 @@ class Restaurant extends Equatable {
   final String? titleImageUrl;
   final double? rating;
   final Price? price;
+  final bool? visible;
   final List<String>? imageUrls;
   Restaurant({
     this.id,
@@ -22,6 +23,7 @@ class Restaurant extends Equatable {
     this.rating,
     this.price,
     this.imageUrls,
+    this.visible,
   });
 
   @override
@@ -33,6 +35,7 @@ class Restaurant extends Equatable {
         this.rating,
         this.price,
         this.imageUrls,
+        this.visible,
       ];
   @override
   bool? get stringify => true;
