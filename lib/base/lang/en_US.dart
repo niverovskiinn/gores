@@ -23,6 +23,8 @@ const unknownError = "unknownError";
 const addRest = "addRest";
 const joinUs = "joinUs";
 const unknown = "unknown";
+const unauthorized = "unauthorized";
+const badFile = "badFile";
 
 const Map<String, String> en_US = {
   flag: "🇺🇸",
@@ -51,4 +53,6 @@ const Map<String, String> en_US = {
   addRest: "Add your restaurant to our system.",
   joinUs: "Join to our platform, where you can reserve tables in restaurants.",
   unknown: "Unknown",
+  unauthorized: "Unauthorized",
+  badFile: "Bad file",
 };

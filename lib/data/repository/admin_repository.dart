@@ -1,4 +1,7 @@
-import 'package:uuid/uuid.dart';
+import 'package:either_dart/either.dart';
+import 'package:get/utils.dart';
+import 'package:gores/base/lang/en_US.dart';
+import 'package:gores/data/models/default_error.dart';
 
 import 'package:gores/data/database.dart';
 import 'package:gores/data/file_picker_manager.dart';
@@ -15,47 +18,66 @@ class AdminRepository {
 
   AdminRepository(this._authRepository, this._fileStorage, this._filePicker);
 
-  Future<Stream<List<Restaurant?>>> getRestaurants() async {
-    if (_authRepository.isLoggedIn())
-      return await _db.getAdminRestaurants(_authRepository.currentUser!.uid);
-    return Stream.empty();
-  }
-
-  Future<void> addRestaurant(Restaurant restaurant) async {
-    // look transactions
-    //https://firebase.flutter.dev/docs/firestore/usage#transactions
-    if (_authRepository.isLoggedIn()) {
-      await _db.addRestaurant(restaurant);
-      final rests = await (await getRestaurants()).first;
-      final res = <String>[];
-      rests.forEach((r) {
-        if (r != null && r.id != null) {
-          res.add(r.id!);
-        }
-      });
-      await _db.updateAdminRestaurants(_authRepository.currentUser!.uid, res);
+  Future<Either<DefaultError, Stream<List<Restaurant?>>>>
+      getRestaurants() async {
+    try {
+      if (_authRepository.isLoggedIn())
+        return Right(
+            await _db.getAdminRestaurants(_authRepository.currentUser!.uid));
+    } catch (e) {
+      return Left(DefaultError(message: e.toString()));
     }
+    return Left(DefaultError(message: unauthorized.tr));
   }
 
-  Future<void> rRestaurant(Restaurant restaurant) async {
-    await _db.addRestaurant(restaurant);
-  }
-
-  Future<void> updateRestaurant(String id, Restaurant restaurant) async {}
-
-  Future<String?> pickTitleImage(String restId) async {
-    final file = await _filePicker.singleImage();
-    if (file != null) {
-      final path =
-          "${FileStorageManager.images}/$restId/${FileStorageManager.titleImage}/";
-      return await _fileStorage.uploadPlatformFile(file, path: path);
+  Future<Either<DefaultError, void>> addRestaurant(
+      Restaurant restaurant) async {
+    try {
+      if (_authRepository.isLoggedIn() && restaurant.id != null) {
+        return Right(await _db.addRestaurant(
+            _authRepository.currentUser!.uid, restaurant));
+      }
+    } catch (e) {
+      return Left(DefaultError(message: e.toString()));
     }
+    return Left(
+        DefaultError(message: unauthorized.tr + ' || restaurant.id == null'));
   }
 
-  Future<List<String>> pickImages(String restId) async {
-    final files = await _filePicker.multipleImages();
-    final path = "${FileStorageManager.images}/$restId/";
-    final urls = await _fileStorage.uploadPlatformFiles(files, path: path);
-    return urls;
+  Future<Either<DefaultError, void>> updateRestaurant(
+      String id, Restaurant restaurant) async {
+    try {
+      if (_authRepository.isLoggedIn()) {
+        return Right(await _db.updateRestaurant(id, restaurant));
+      }
+    } catch (e) {
+      return Left(DefaultError(message: e.toString()));
+    }
+    return Left(DefaultError(message: unauthorized.tr));
+  }
+
+  Future<Either<DefaultError, String?>> pickTitleImage(String restId) async {
+    try {
+      final file = await _filePicker.singleImage();
+      if (file != null) {
+        final path =
+            "${FileStorageManager.images}/$restId/${FileStorageManager.titleImage}/";
+        return Right(await _fileStorage.uploadPlatformFile(file, path: path));
+      }
+    } catch (e) {
+      return Left(DefaultError(message: e.toString()));
+    }
+    return Left(DefaultError(message: badFile.tr));
+  }
+
+  Future<Either<DefaultError, List<String>>> pickImages(String restId) async {
+    try {
+      final files = await _filePicker.multipleImages();
+      final path = "${FileStorageManager.images}/$restId/";
+      final urls = await _fileStorage.uploadPlatformFiles(files, path: path);
+      return Right(urls);
+    } catch (e) {
+      return Left(DefaultError(message: e.toString()));
+    }
   }
 }

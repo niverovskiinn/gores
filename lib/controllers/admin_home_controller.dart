@@ -1,7 +1,9 @@
 import 'package:get/get.dart';
+import 'package:gores/base/lang/en_US.dart';
 import 'package:gores/data/models/restaurant.dart';
 import 'package:gores/data/repository/admin_repository.dart';
 import 'package:gores/data/repository/auth_repository.dart';
+import 'package:gores/utils/snackbars.dart';
 
 class AdminHomeController extends GetxController {
   final AuthRepository _authRepository;
@@ -11,10 +13,14 @@ class AdminHomeController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
-    _restaurants.bindStream(await _adminRepository.getRestaurants());
+    final resp = await _adminRepository.getRestaurants();
+
+    resp.fold(
+      (err) => snackbarError(error.tr, err.message),
+      (stream) => _restaurants.bindStream(stream),
+    );
   }
 
-//TODO use Uuid for rest id
   var _restaurants = <Restaurant?>[].obs;
   set restaurants(List<Restaurant?> value) =>
       this._restaurants = value as RxList<Restaurant?>;

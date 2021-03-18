@@ -16,6 +16,7 @@ Restaurant _$RestaurantFromJson(Map<String, dynamic> json) {
     price: _$enumDecodeNullable(_$PriceEnumMap, json['price']),
     imageUrls:
         (json['imageUrls'] as List<dynamic>?)?.map((e) => e as String).toList(),
+    visible: json['visible'] as bool?,
   );
 }
 
@@ -27,6 +28,7 @@ Map<String, dynamic> _$RestaurantToJson(Restaurant instance) =>
       'titleImageUrl': instance.titleImageUrl,
       'rating': instance.rating,
       'price': _$PriceEnumMap[instance.price],
+      'visible': instance.visible,
       'imageUrls': instance.imageUrls,
     };
 

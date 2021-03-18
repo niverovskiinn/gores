@@ -28,13 +28,22 @@ class Database {
     return data != null ? Profile.fromJson(data) : null;
   }
 
-  Future<void> addRestaurant(Restaurant restaurant) async {
-    await _db.collection(restaurants).add(restaurant.toJson());
+  Future<void> addRestaurant(String userId, Restaurant restaurant) async {
+    if (restaurant.id == null) return;
+    final batch = _db.batch();
+    batch.set(
+        _db.collection(restaurants).doc(restaurant.id), restaurant.toJson());
+    batch.update(_db.collection(users).doc(userId), {
+      restaurants: FieldValue.arrayUnion([restaurant.id])
+    });
+    await batch.commit();
   }
 
-  Future<void> updateAdminRestaurants(
-      String userId, List<String> restIds) async {
-    await _db.collection(users).doc(userId).update({restaurants: restIds});
+  Future<void> addAdminRestaurants(String userId, List<String> restIds) async {
+    await _db
+        .collection(users)
+        .doc(userId)
+        .update({restaurants: FieldValue.arrayUnion(restIds)});
   }
 
   Future<void> updateRestaurant(String id, Restaurant restaurant) async {

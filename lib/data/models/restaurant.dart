@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
+import 'package:uuid/uuid.dart';
 
 import 'price.dart';
 
@@ -15,6 +16,7 @@ class Restaurant extends Equatable {
   final Price? price;
   final bool? visible;
   final List<String>? imageUrls;
+
   Restaurant({
     this.id,
     this.name,
@@ -25,6 +27,16 @@ class Restaurant extends Equatable {
     this.imageUrls,
     this.visible,
   });
+
+  Restaurant.uid({
+    this.name,
+    this.description,
+    this.titleImageUrl,
+    this.rating,
+    this.price,
+    this.imageUrls,
+    this.visible,
+  }) : id = Uuid().v4();
 
   @override
   List<Object?> get props => [
