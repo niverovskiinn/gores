@@ -16,7 +16,7 @@ class AdminHomeController extends GetxController {
     final resp = await _adminRepository.getRestaurants();
 
     resp.fold(
-      (err) => snackbarError(error.tr, err.message),
+      (err) => snackbarError(errorStr.tr, err.message),
       (stream) => _restaurants.bindStream(stream),
     );
   }

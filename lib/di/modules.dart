@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:gores/controllers/admin_home_controller.dart';
+import 'package:gores/controllers/new_restaurant_controller.dart';
 import 'package:gores/data/file_picker_manager.dart';
 import 'package:gores/data/file_storage_manager.dart';
 import 'package:gores/data/repository/admin_repository.dart';

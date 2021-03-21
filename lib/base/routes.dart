@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:gores/di/modules.dart';
 import 'package:gores/ui/auth/login.dart';
 import 'package:gores/ui/auth/signup.dart';
 import 'package:gores/ui/mobile/home/home.dart';

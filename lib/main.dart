@@ -22,6 +22,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      smartManagement: SmartManagement.onlyBuilder,
       initialBinding: InitialBinding(),
       getPages: getPages,
       translations: Get.put<TranslationService>(TranslationService()),

@@ -32,7 +32,7 @@ class SignUpPage extends GetView<SignUpController> {
                 onTap: () async {
                   await controller.signUp();
                 },
-                title: next.tr.toUpperCase(),
+                title: nextStr.tr.toUpperCase(),
               ),
             ],
           ),
@@ -48,7 +48,7 @@ class SignUpPage extends GetView<SignUpController> {
                     height: kIsWeb ? webTopSpace : mobileTopSpace,
                   ),
                   Text(
-                    signUp.tr,
+                    signUpStr.tr,
                     style: Get.textTheme!.headline3,
                   ),
                   SizedBox(
@@ -62,14 +62,14 @@ class SignUpPage extends GetView<SignUpController> {
                     height: verticalDefaultSize,
                   ),
                   DefaultTextField(
-                    hint: name.tr,
+                    hint: nameStr.tr,
                     onChanged: (value) => controller.name = value,
                   ),
                   SizedBox(
                     height: verticalDefaultSize,
                   ),
                   DefaultTextField(
-                    hint: email.tr,
+                    hint: emailStr.tr,
                     onChanged: (value) => controller.email = value,
                   ),
                   SizedBox(
@@ -83,7 +83,7 @@ class SignUpPage extends GetView<SignUpController> {
                     height: verticalDefaultSize,
                   ),
                   DefaultPassword(
-                    hint: password.tr,
+                    hint: passwordStr.tr,
                     onChanged: (value) => controller.password = value,
                   ),
                   SizedBox(

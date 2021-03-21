@@ -47,10 +47,10 @@ class AuthRepository {
       }
       return true;
     } on FirebaseAuthException catch (e) {
-      snackbarError(error.tr, e.message ?? unknownError.tr);
+      snackbarError(errorStr.tr, e.message ?? unknownError.tr);
       return false;
     } catch (e) {
-      snackbarError(error.tr, unknownError.tr);
+      snackbarError(errorStr.tr, unknownError.tr);
       return false;
     }
   }
@@ -77,7 +77,7 @@ class AuthRepository {
       _proccessException(e);
       return false;
     } catch (e) {
-      snackbarError(error.tr, unknownError.tr);
+      snackbarError(errorStr.tr, unknownError.tr);
       return false;
     }
   }
@@ -87,29 +87,29 @@ class AuthRepository {
 
     switch (ex.code) {
       case 'invalid-email':
-        snackbarError(error.tr, badEmail.tr);
+        snackbarError(errorStr.tr, badEmail.tr);
         break;
       case 'user-disabled':
-        snackbarError(error.tr, userDisabled.tr);
+        snackbarError(errorStr.tr, userDisabled.tr);
         break;
       case 'weak-password':
-        snackbarError(error.tr, badPassword.tr);
+        snackbarError(errorStr.tr, badPassword.tr);
         break;
       case 'email-already-in-use':
-        snackbarError(error.tr, emailInUse.tr);
+        snackbarError(errorStr.tr, emailInUse.tr);
         break;
       case 'operation-not-allowed':
-        snackbarError(error.tr, operarionNotAllowed.tr);
+        snackbarError(errorStr.tr, operarionNotAllowed.tr);
         break;
       case 'user-not-found':
-        snackbarError(error.tr, userNotFound.tr);
+        snackbarError(errorStr.tr, userNotFound.tr);
         break;
       case 'wrong-password':
-        snackbarError(error.tr, userNotFound.tr);
+        snackbarError(errorStr.tr, userNotFound.tr);
         break;
       default:
         log(ex.code);
-        snackbarError(error.tr, ex.message ?? unknownError.tr);
+        snackbarError(errorStr.tr, ex.message ?? unknownError.tr);
     }
   }
 
@@ -118,9 +118,9 @@ class AuthRepository {
       await _firebaseAuth.signOut();
       Get.offAllNamed(Routes.login);
     } on FirebaseAuthException catch (e) {
-      snackbarError(error.tr, e.message ?? unknownError.tr);
+      snackbarError(errorStr.tr, e.message ?? unknownError.tr);
     } catch (e) {
-      snackbarError(error.tr, unknownError.tr);
+      snackbarError(errorStr.tr, unknownError.tr);
     }
   }
 

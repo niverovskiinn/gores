@@ -44,26 +44,26 @@ class SignUpController extends GetxController {
       if (res) {
         Get.offAllNamed(kIsWeb ? Routes.adminHome : Routes.home);
       } else {
-        snackbarError(error.tr, unknownError.tr);
+        snackbarError(errorStr.tr, unknownError.tr);
       }
     }
   }
 
   bool _validate() {
     if (name!.isEmpty) {
-      snackbarError(error.tr, emptyName.tr);
+      snackbarError(errorStr.tr, emptyName.tr);
       return false;
     }
     if (email!.isEmpty || !email!.isEmail) {
-      snackbarError(error.tr, badEmail.tr);
+      snackbarError(errorStr.tr, badEmail.tr);
       return false;
     }
     if (!_validatePassword(password)) {
-      snackbarError(error.tr, badPassword.tr);
+      snackbarError(errorStr.tr, badPassword.tr);
       return false;
     }
     if (password != confPassword) {
-      snackbarError(error.tr, confPassNotEqualPass.tr);
+      snackbarError(errorStr.tr, confPassNotEqualPass.tr);
       return false;
     }
 

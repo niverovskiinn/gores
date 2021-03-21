@@ -101,7 +101,7 @@ class RestaurantItem extends StatelessWidget {
     return RatingBarIndicator(
       rating: selected,
       itemBuilder: (context, index) => Icon(
-        Icons.monetization_on,
+        Icons.attach_money,
         color: greenColor,
       ),
       itemCount: 4,

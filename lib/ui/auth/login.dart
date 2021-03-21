@@ -29,14 +29,14 @@ class LoginPage extends GetView<LoginController> {
             children: [
               DefaultButton(
                 onTap: () => Get.toNamed(Routes.signup),
-                title: signUp.tr.toUpperCase(),
+                title: signUpStr.tr.toUpperCase(),
               ),
               Spacer(),
               DefaultButton(
                 onTap: () async {
                   await controller.next();
                 },
-                title: next.tr.toUpperCase(),
+                title: nextStr.tr.toUpperCase(),
               ),
             ],
           ),
@@ -52,21 +52,21 @@ class LoginPage extends GetView<LoginController> {
                     height: kIsWeb ? webTopSpace : mobileTopSpace,
                   ),
                   Text(
-                    authorization.tr,
+                    authorizationStr.tr,
                     style: Get.textTheme!.headline3,
                   ),
                   SizedBox(
                     height: verticalDefaultSize,
                   ),
                   DefaultTextField(
-                    hint: email.tr,
+                    hint: emailStr.tr,
                     onChanged: (value) => controller.email = value,
                   ),
                   SizedBox(
                     height: verticalDefaultSize,
                   ),
                   DefaultPassword(
-                    hint: password.tr,
+                    hint: passwordStr.tr,
                     onChanged: (value) => controller.password = value,
                   ),
                 ],

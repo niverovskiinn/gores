@@ -1,15 +1,16 @@
-const error = "error";
-const login = "login";
-const password = "password";
-const next = "next";
-const authorization = "authorization";
+const errorStr = "error";
+const loginStr = "login";
+const passwordStr = "password";
+const nextStr = "next";
+const authorizationStr = "authorization";
 const emptyEmailPassword = "emptyEmailPassword";
-const email = "email";
+const emailStr = "email";
 const badEmail = "badEmail";
 const userNotFound = "userNotFound";
 const wrongPassword = "wrongPassword";
-const signUp = "signUp";
-const name = "name";
+const signUpStr = "signUp";
+const addressStr = "address";
+const nameStr = "name";
 const confirmPassword = "confirmPassword";
 const emptyName = "emptyName";
 const badPassword = "badPassword";
@@ -25,20 +26,28 @@ const joinUs = "joinUs";
 const unknown = "unknown";
 const unauthorized = "unauthorized";
 const badFile = "badFile";
+const descriptionStr = "description";
+const priceStr = "price";
+const amountStr = "amount";
+const placesStr = "places";
+const tablesStr = "tables";
+const previewStr = "preview";
+const pickTitleImage = "pickTitleImage";
+const pickImages = "pickImages";
 
 const Map<String, String> en_US = {
   flag: "🇺🇸",
-  error: "Error",
-  login: "Login",
-  password: "Password",
-  next: "Next",
-  authorization: "Authorization",
+  errorStr: "Error",
+  loginStr: "Login",
+  passwordStr: "Password",
+  nextStr: "Next",
+  authorizationStr: "Authorization",
   emptyEmailPassword: "Enter email and password",
-  email: "Email",
+  emailStr: "Email",
   badEmail: "The email is badly formatted.",
   userNotFound: "User not found",
-  signUp: "Sign up",
-  name: "Name",
+  signUpStr: "Sign up",
+  nameStr: "Name",
   confirmPassword: "Сonfirm password",
   emptyName: "Enter the name",
   badPassword:
@@ -55,4 +64,13 @@ const Map<String, String> en_US = {
   unknown: "Unknown",
   unauthorized: "Unauthorized",
   badFile: "Bad file",
+  descriptionStr: "Description",
+  priceStr: "Price",
+  addressStr: "Address",
+  amountStr: "Tables amount",
+  placesStr: "Places amount",
+  tablesStr: "Tables",
+  previewStr: "Preview",
+  pickTitleImage: "Pick title image",
+  pickImages: "Pick images",
 };

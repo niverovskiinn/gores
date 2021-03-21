@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:gores/base/lang/en_US.dart';
 import 'package:gores/base/routes.dart';
 import 'package:gores/controllers/admin_home_controller.dart';
-import 'package:gores/data/repository/admin_repository.dart';
 import 'package:gores/ui/mobile/home/widgets/restaurant_item.dart';
 import 'package:gores/ui/widgets/appbar.dart';
 import 'package:gores/ui/widgets/background.dart';
@@ -75,17 +74,11 @@ class AdminHomePage extends GetView<AdminHomeController> {
                         : Column(
                             children: [
                               TextButton(
-                                onPressed: () {
-                                  Get.find<AdminRepository>()
-                                      .pickImages("restId");
-                                },
+                                onPressed: () {},
                                 child: Text("pickImages"),
                               ),
                               TextButton(
-                                onPressed: () {
-                                  Get.find<AdminRepository>()
-                                      .pickTitleImage("restId");
-                                },
+                                onPressed: () {},
                                 child: Text("pickTitleImage"),
                               ),
                             ],

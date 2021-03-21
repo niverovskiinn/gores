@@ -29,18 +29,18 @@ class LoginController extends GetxController {
             // : Routes.home
             );
       } else {
-        snackbarError(error.tr, unknownError.tr);
+        snackbarError(errorStr.tr, unknownError.tr);
       }
     }
   }
 
   bool _validate() {
     if (email!.isEmpty || password!.isEmpty) {
-      snackbarError(error.tr, emptyEmailPassword.tr);
+      snackbarError(errorStr.tr, emptyEmailPassword.tr);
       return false;
     }
     if (!email!.isEmail) {
-      snackbarError(error.tr, badEmail.tr);
+      snackbarError(errorStr.tr, badEmail.tr);
       return false;
     }
 

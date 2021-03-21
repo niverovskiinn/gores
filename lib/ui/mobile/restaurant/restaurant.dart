@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gores/controllers/restaurant_controller.dart';
 import 'package:gores/data/models/restaurant.dart';
+import 'package:gores/ui/mobile/restaurant/widgets/restaurant_view.dart';
 import 'package:gores/ui/widgets/appbar.dart';
 import 'package:gores/ui/widgets/background.dart';
 import 'package:gores/ui/widgets/wrapper.dart';
@@ -17,7 +18,7 @@ class RestaurantPage extends GetView<RestaurantController> {
           back: true,
         ),
         body: DefaultWrapper(
-          child: Column(),
+          child: RestaurantView(restaurant: restaurant ?? Restaurant()),
         ),
       ),
     );
