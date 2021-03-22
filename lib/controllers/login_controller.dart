@@ -23,11 +23,7 @@ class LoginController extends GetxController {
     if (_validate()) {
       final res = await authRepository.login(email!, password!);
       if (res) {
-        Get.offAllNamed(
-            //TODO kIsWeb ?
-            Routes.adminHome
-            // : Routes.home
-            );
+        Get.offAllNamed(kIsWeb ? Routes.adminHome : Routes.home);
       } else {
         snackbarError(errorStr.tr, unknownError.tr);
       }

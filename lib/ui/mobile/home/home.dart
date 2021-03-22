@@ -52,7 +52,7 @@ class HomeScreen extends GetView<HomeController> {
                 SizedBox(
                   height: MediaQuery.of(context).size.height *
                       (controller.searchVisible! ? .75 : .85),
-                  child: controller.restaurants.isEmpty
+                  child: controller.restaurants.isNotEmpty
                       ? _buildRestList(context, controller.restaurants)
                       : LoadingRestaurantList(
                           itemsAmount: 3,
@@ -68,27 +68,18 @@ class HomeScreen extends GetView<HomeController> {
 
   Widget _buildRestList(
     BuildContext context,
-    List<Restaurant> restaurants,
+    List<Restaurant?> restaurants,
   ) {
     return ListView.builder(
       itemBuilder: (context, i) {
-        return Padding(
-          padding: EdgeInsets.fromLTRB(10, i == 0 ? 10 : 0, 10, 10),
-          child: RestaurantItem(
-            item: Restaurant(
-              id: "12",
-              titleImageUrl:
-                  'https://cityhost.ua/upload_img/blog5ef308ea5529c_trash2-01.jpg',
-              name: "NameNameNameNameNameName",
-              description:
-                  "qwere asd asdsds we saa asewerewerwqqwere asd asdsds we saa asewerewerwqqwere asd asdsds we saa asewerewerwq",
-              rating: 3.8,
-              price: Price.high,
-            ),
-          ),
-        );
+        return restaurants[i] != null
+            ? Padding(
+                padding: EdgeInsets.fromLTRB(10, i == 0 ? 10 : 0, 10, 10),
+                child: RestaurantItem(item: restaurants[i]!),
+              )
+            : SizedBox();
       },
-      itemCount: 10,
+      itemCount: restaurants.length,
     );
   }
 }

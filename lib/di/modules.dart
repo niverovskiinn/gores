@@ -10,6 +10,7 @@ import 'package:gores/controllers/login_controller.dart';
 import 'package:gores/controllers/profile_controller.dart';
 import 'package:gores/controllers/signup_controller.dart';
 import 'package:gores/data/database.dart';
+import 'package:gores/data/repository/restaurant_repository.dart';
 
 // https://github.com/jonataslaw/getx/blob/master/documentation/en_US/dependency_management.md
 class InitialBinding implements Bindings {
@@ -23,10 +24,11 @@ class InitialBinding implements Bindings {
           Get.find(),
           Get.find(),
         ));
+    Get.lazyPut<RestaurantRepository>(() => RestaurantRepository(Get.find()));
     Get.lazyPut<ProfileController>(() => ProfileController());
     Get.lazyPut<LoginController>(
         () => LoginController(authRepository: Get.find()));
-    Get.lazyPut<HomeController>(() => HomeController());
+    Get.lazyPut<HomeController>(() => HomeController(Get.find()));
     Get.lazyPut<SignUpController>(
         () => SignUpController(authRepository: Get.find()));
     Get.lazyPut<AdminHomeController>(

@@ -39,11 +39,7 @@ class MyApp extends StatelessWidget {
     await Get.find<TranslationService>().restoreLocale();
 
     if (Get.find<AuthRepository>().isLoggedIn()) {
-      Get.offAllNamed(
-          // kIsWeb ?
-          Routes.adminHome
-          // :Routes.home
-          );
+      Get.offAllNamed(kIsWeb ? Routes.adminHome : Routes.home);
     } else {
       Get.offAllNamed(Routes.login);
     }

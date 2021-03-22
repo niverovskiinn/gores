@@ -63,12 +63,12 @@ class AuthRepository {
       );
       if (userCred.user != null) {
         final profile = await Database.instance.getProfile(userCred.user!.uid);
-        //TODO if (profile != null &&
-        //     (!kIsWeb && profile.role == Roles.admin ||
-        //         kIsWeb && profile.role == Roles.user)) {
-        //   logout();
-        //   return false;
-        // }
+        if (profile != null &&
+            (!kIsWeb && profile.role == Roles.admin ||
+                kIsWeb && profile.role == Roles.user)) {
+          logout();
+          return false;
+        }
         Get.find<ProfileController>().profile = profile;
         return true;
       }

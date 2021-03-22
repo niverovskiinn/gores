@@ -74,4 +74,13 @@ class Database {
       }).toList();
     });
   }
+
+  Future<Stream<List<Restaurant?>>> getRestaurantsStream() async {
+    final restaurantsSnapshot = _db.collection(restaurants).snapshots();
+    return restaurantsSnapshot.map((e) {
+      return e.docs.map((element) {
+        return element.exists ? Restaurant.fromJson(element.data()!) : null;
+      }).toList();
+    });
+  }
 }
