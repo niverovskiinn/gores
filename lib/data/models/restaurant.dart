@@ -1,10 +1,11 @@
 import 'package:equatable/equatable.dart';
+import 'package:gores/data/models/reservation.dart';
 import 'package:gores/data/models/restaurant_tables.dart';
 import 'package:uuid/uuid.dart';
 
 import 'price.dart';
 
-part 'restaurant.g.dart';
+part 'restaurant.json.dart';
 
 class Restaurant extends Equatable {
   final String? id;
@@ -17,31 +18,36 @@ class Restaurant extends Equatable {
   final bool? visible;
   final List<String>? imageUrls;
   final List<RestaurantTables>? tables;
+  final List<Reservation>? reservations;
+  final DateTime? created;
 
-  Restaurant({
-    this.id,
-    this.name,
-    this.description,
-    this.address,
-    this.titleImageUrl,
-    this.rating,
-    this.price,
-    this.imageUrls,
-    this.visible,
-    this.tables,
-  });
+  Restaurant(
+      {this.id,
+      this.name,
+      this.description,
+      this.address,
+      this.titleImageUrl,
+      this.rating,
+      this.price,
+      this.imageUrls,
+      this.visible,
+      this.tables,
+      this.created,
+      this.reservations});
 
-  Restaurant.uid({
-    this.name,
-    this.description,
-    this.titleImageUrl,
-    this.address,
-    this.rating,
-    this.price,
-    this.imageUrls,
-    this.visible,
-    this.tables,
-  }) : id = Uuid().v4();
+  Restaurant.uid(
+      {this.name,
+      this.description,
+      this.titleImageUrl,
+      this.address,
+      this.rating,
+      this.price,
+      this.imageUrls,
+      this.visible,
+      this.tables,
+      this.created,
+      this.reservations})
+      : id = Uuid().v4();
 
   @override
   List<Object?> get props => [
@@ -55,6 +61,8 @@ class Restaurant extends Equatable {
         this.imageUrls,
         this.visible,
         this.tables,
+        this.created,
+        this.reservations
       ];
   @override
   bool? get stringify => true;

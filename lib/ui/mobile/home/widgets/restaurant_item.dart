@@ -59,7 +59,7 @@ class RestaurantItem extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                       ),
                       RatingBarIndicator(
-                        rating: item.rating!,
+                        rating: item.rating ?? 0,
                         itemBuilder: (context, index) => Icon(
                           Icons.star,
                           color: pinkColor,

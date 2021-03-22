@@ -1,10 +1,14 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:get/get.dart';
 import 'package:gores/base/lang/en_US.dart';
 import 'package:gores/base/routes.dart';
+import 'package:gores/base/style.dart';
 import 'package:gores/controllers/admin_home_controller.dart';
 import 'package:gores/ui/mobile/home/widgets/restaurant_item.dart';
+import 'package:gores/ui/web/admin_home/widgets/admin_restaurant_view.dart';
 import 'package:gores/ui/widgets/appbar.dart';
 import 'package:gores/ui/widgets/background.dart';
 import 'package:gores/ui/widgets/wrapper.dart';
@@ -41,17 +45,19 @@ class AdminHomePage extends GetView<AdminHomeController> {
                           (e) {
                             return e != null
                                 ? ListTile(
+                                    selectedTileColor: greenColor,
+                                    selected: e.id == controller.selectedId,
                                     title: Text(
                                       e.name ?? unknown.tr,
                                       style: Get.textTheme!.headline5,
                                     ),
-                                    onTap: () =>
-                                        controller.selectedRestaurant = e,
+                                    onTap: () => controller.selectedId = e.id,
                                   )
                                 : SizedBox();
                           },
                         ).toList()
                           ..add(NeumorphicButton(
+                            margin: EdgeInsets.all(20),
                             style: NeumorphicStyle(
                               color: Colors.transparent,
                               boxShape: NeumorphicBoxShape.circle(),
@@ -69,21 +75,19 @@ class AdminHomePage extends GetView<AdminHomeController> {
               Expanded(
                   flex: 4,
                   child: Obx(
-                    () => controller.selectedRestaurant != null
-                        ? RestaurantItem(
-                            item: controller.selectedRestaurant!,
+                    () => controller.selectedId != null &&
+                            (controller.selectedId?.isNotEmpty ?? false)
+                        ? AdminRestaurantPage(
+                            item: controller.restaurants.firstWhere(
+                                (e) => e?.id == controller.selectedId)!,
                           )
-                        : Column(
-                            children: [
-                              TextButton(
-                                onPressed: () {},
-                                child: Text("pickImages"),
+                        : Center(
+                            child: Text(
+                              "Select cafe",
+                              style: Get.textTheme?.headline4?.copyWith(
+                                color: Colors.grey,
                               ),
-                              TextButton(
-                                onPressed: () {},
-                                child: Text("pickTitleImage"),
-                              ),
-                            ],
+                            ),
                           ),
                   )),
             ],

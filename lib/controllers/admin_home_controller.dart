@@ -18,9 +18,6 @@ class AdminHomeController extends GetxController {
     resp.fold(
       (err) => snackbarError(errorStr.tr, err.message),
       (stream) {
-        stream.forEach((e) {
-          print(e);
-        });
         _restaurants.bindStream(stream);
       },
     );
@@ -31,9 +28,9 @@ class AdminHomeController extends GetxController {
       this._restaurants = value as RxList<Restaurant?>;
   List<Restaurant?> get restaurants => this._restaurants;
 
-  var _selectedRestaurant = Rx<Restaurant?>();
-  set selectedRestaurant(Restaurant? value) => _selectedRestaurant(value);
-  Restaurant? get selectedRestaurant => this._selectedRestaurant();
+  var _selectedId = "".obs;
+  set selectedId(String? value) => _selectedId.value = value;
+  String? get selectedId => this._selectedId.value;
 
   void logout() {
     _authRepository.logout();

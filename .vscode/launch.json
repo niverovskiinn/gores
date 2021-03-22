@@ -8,11 +8,11 @@
             "name": "gores",
             "request": "launch",
             "type": "dart",
-            "deviceId": "chrome",
-            "args": [
-                "--web-renderer",
-                "html"
-            ]
+            // "deviceId": "chrome",
+            // "args": [
+            //     "--web-renderer",
+            //     "html"
+            // ]
         },
     ]
 }

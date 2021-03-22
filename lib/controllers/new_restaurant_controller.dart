@@ -79,6 +79,7 @@ class NewRestaurantController extends GetxController {
             imageUrls: images,
             price: convertPrice(price!),
             visible: true,
+            created: DateTime.now(),
             tables: tables),
       );
       resp.fold(
