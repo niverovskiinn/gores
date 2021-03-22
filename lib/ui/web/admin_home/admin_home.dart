@@ -35,10 +35,11 @@ class AdminHomePage extends GetView<AdminHomeController> {
               Expanded(
                   flex: 1,
                   child: Obx(
-                    () => ListView(
-                      children: controller.restaurants
-                          .map(
-                            (e) => e != null
+                    () {
+                      return ListView(
+                        children: controller.restaurants.map(
+                          (e) {
+                            return e != null
                                 ? ListTile(
                                     title: Text(
                                       e.name ?? unknown.tr,
@@ -47,22 +48,23 @@ class AdminHomePage extends GetView<AdminHomeController> {
                                     onTap: () =>
                                         controller.selectedRestaurant = e,
                                   )
-                                : SizedBox(),
-                          )
-                          .toList()
-                            ..add(NeumorphicButton(
-                              style: NeumorphicStyle(
-                                color: Colors.transparent,
-                                boxShape: NeumorphicBoxShape.circle(),
-                              ),
-                              child: Icon(
-                                Icons.add,
-                              ),
-                              onPressed: () {
-                                Get.toNamed(Routes.newRestaurant);
-                              },
-                            )),
-                    ),
+                                : SizedBox();
+                          },
+                        ).toList()
+                          ..add(NeumorphicButton(
+                            style: NeumorphicStyle(
+                              color: Colors.transparent,
+                              boxShape: NeumorphicBoxShape.circle(),
+                            ),
+                            child: Icon(
+                              Icons.add,
+                            ),
+                            onPressed: () {
+                              Get.toNamed(Routes.newRestaurant);
+                            },
+                          )),
+                      );
+                    },
                   )),
               Expanded(
                   flex: 4,

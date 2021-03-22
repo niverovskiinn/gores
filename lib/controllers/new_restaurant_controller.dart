@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:gores/base/lang/en_US.dart';
+import 'package:gores/base/routes.dart';
 import 'package:gores/data/models/price.dart';
 import 'package:gores/data/models/restaurant.dart';
 import 'package:gores/data/models/restaurant_tables.dart';
@@ -70,19 +71,19 @@ class NewRestaurantController extends GetxController {
     if (_validate()) {
       final resp = await repository.addRestaurant(
         Restaurant(
-          id: _id,
-          name: name,
-          description: description,
-          address: address,
-          titleImageUrl: titleUrl,
-          imageUrls: images,
-          price: convertPrice(price!),
-          visible: true,
-        ),
+            id: _id,
+            name: name,
+            description: description,
+            address: address,
+            titleImageUrl: titleUrl,
+            imageUrls: images,
+            price: convertPrice(price!),
+            visible: true,
+            tables: tables),
       );
       resp.fold(
         (err) => snackbarError(errorStr.tr, err.message),
-        (_) => Get.back(),
+        (_) => Get.offAllNamed(Routes.adminHome),
       );
     }
   }

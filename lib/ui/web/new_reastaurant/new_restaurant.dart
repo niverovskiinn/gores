@@ -25,7 +25,7 @@ class NewRestaurantPage extends StatelessWidget {
           trailing: IconButton(
             icon: Icon(Icons.save),
             onPressed: () {
-              print(controller.tables);
+              controller.addRestaurant();
             },
           ),
         ),
@@ -99,14 +99,18 @@ class NewRestaurantPage extends StatelessWidget {
           ),
           NeumorphicButton(
             child: Text(pickTitleImage.tr),
-            onPressed: () {},
+            onPressed: () {
+              controller.pickTitleImage();
+            },
           ),
           SizedBox(
             height: 15,
           ),
           NeumorphicButton(
             child: Text(pickImages.tr),
-            onPressed: () {},
+            onPressed: () {
+              controller.pickImages();
+            },
           ),
           SizedBox(
             height: 15,

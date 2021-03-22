@@ -17,7 +17,12 @@ class AdminHomeController extends GetxController {
 
     resp.fold(
       (err) => snackbarError(errorStr.tr, err.message),
-      (stream) => _restaurants.bindStream(stream),
+      (stream) {
+        stream.forEach((e) {
+          print(e);
+        });
+        _restaurants.bindStream(stream);
+      },
     );
   }
 

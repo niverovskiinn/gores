@@ -1,13 +1,11 @@
 import 'package:equatable/equatable.dart';
 import 'package:gores/data/models/restaurant_tables.dart';
-import 'package:json_annotation/json_annotation.dart';
 import 'package:uuid/uuid.dart';
 
 import 'price.dart';
 
 part 'restaurant.g.dart';
 
-@JsonSerializable()
 class Restaurant extends Equatable {
   final String? id;
   final String? name;

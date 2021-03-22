@@ -31,11 +31,12 @@ Map<String, dynamic> _$RestaurantToJson(Restaurant instance) =>
       'description': instance.description,
       'address': instance.address,
       'titleImageUrl': instance.titleImageUrl,
-      'rating': instance.rating,
+      if (instance.rating != null) 'rating': instance.rating,
       'price': _$PriceEnumMap[instance.price],
       'visible': instance.visible,
       'imageUrls': instance.imageUrls,
-      'tables': instance.tables,
+      if (instance.tables != null)
+        'tables': instance.tables!.map((e) => e.toJson()).toList(),
     };
 
 K _$enumDecode<K, V>(
