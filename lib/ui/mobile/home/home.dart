@@ -3,7 +3,6 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:get/get.dart';
 import 'package:gores/data/repository/auth_repository.dart';
 import 'package:gores/controllers/home_controller.dart';
-import 'package:gores/data/models/price.dart';
 import 'package:gores/data/models/restaurant.dart';
 import 'package:gores/ui/mobile/home/widgets/loading_restaurants.dart';
 import 'package:gores/ui/mobile/home/widgets/restaurant_item.dart';

@@ -7,18 +7,21 @@ import 'package:gores/ui/widgets/appbar.dart';
 import 'package:gores/ui/widgets/background.dart';
 import 'package:gores/ui/widgets/wrapper.dart';
 
-class RestaurantPage extends GetView<RestaurantController> {
+class RestaurantPage extends StatelessWidget {
+  late final controller = RestaurantController(Get.arguments as Restaurant?);
+
   @override
   Widget build(BuildContext context) {
-    final restaurant = Get.arguments as Restaurant?;
-    print(restaurant);
     return DefaultBackground(
       child: Scaffold(
         appBar: DefaultAppBar(
           back: true,
         ),
         body: DefaultWrapper(
-          child: RestaurantView(restaurant: restaurant ?? Restaurant()),
+          child: RestaurantView(
+            restaurant: controller.restaurant ?? Restaurant(),
+            controller: controller,
+          ),
         ),
       ),
     );
