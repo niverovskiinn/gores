@@ -29,7 +29,7 @@ class SearchField extends StatelessWidget {
         noItemsFoundBuilder: (context) => Padding(
           padding: EdgeInsets.all(20),
           child: Text(
-            'Nnothing',
+            nothing.tr,
             style: Get.textTheme?.bodyText1?.copyWith(
               color: Colors.black38,
               fontSize: 18,
@@ -42,8 +42,7 @@ class SearchField extends StatelessWidget {
               .style
               .copyWith(fontStyle: FontStyle.italic),
           decoration: InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: 'What are you looking for?'),
+              border: OutlineInputBorder(), hintText: whatLooking.tr),
         ),
         suggestionsCallback: (pattern) async {
           return rests.where((element) =>

@@ -78,7 +78,7 @@ class RestaurantView extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
-            "Reserved",
+            reservation.tr,
             style: Get.textTheme?.headline6,
             textAlign: TextAlign.center,
           ),
@@ -91,7 +91,7 @@ class RestaurantView extends StatelessWidget {
                 ? DateFormat('dd.MM.yyyy').format(
                     controller!.selectedDate!,
                   )
-                : "Pick date"),
+                : pickDate.tr),
           ),
           SizedBox(
             height: 10,
@@ -111,7 +111,7 @@ class RestaurantView extends StatelessWidget {
                   ? DateFormat('HH:mm').format(
                       controller!.selectedDate!,
                     )
-                  : "Select time"),
+                  : selectTime.tr),
             ),
           if (controller!.time != null)
             NeumorphicButton(
@@ -119,7 +119,7 @@ class RestaurantView extends StatelessWidget {
               margin: EdgeInsets.symmetric(horizontal: 20),
               onPressed: () {},
               child: Text(
-                "Submit",
+                submit.tr,
                 textAlign: TextAlign.center,
               ),
             )
@@ -135,7 +135,7 @@ class RestaurantView extends StatelessWidget {
         ? Column(
             children: [
               Text(
-                "Select duration",
+                selectDuration.tr,
               ),
               SizedBox(
                 height: 10,
@@ -174,7 +174,7 @@ class RestaurantView extends StatelessWidget {
       return Column(
         children: [
           Text(
-            "Table places amount",
+            tablePlacesAmount.tr,
             textAlign: TextAlign.center,
           ),
           SizedBox(
@@ -201,7 +201,7 @@ class RestaurantView extends StatelessWidget {
       );
     } else {
       return Text(
-        "Available tables with ${controller!.places} places",
+        availableTables.trParams({placesStr: controller!.places.toString()})!,
         textAlign: TextAlign.center,
       );
     }
@@ -232,7 +232,7 @@ class RestaurantView extends StatelessWidget {
         controller!.time!.minute,
       );
     } else {
-      snackbarError("title", "message");
+      snackbarError(errorStr.tr, timeNotAvailable.tr);
     }
     print(controller!.selectedDate);
   }

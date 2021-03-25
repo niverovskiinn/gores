@@ -34,6 +34,16 @@ const tablesStr = "tables";
 const previewStr = "preview";
 const pickTitleImage = "pickTitleImage";
 const pickImages = "pickImages";
+const whatLooking = "whatLooking";
+const nothing = "nothing";
+const reservation = "reservation";
+const pickDate = "pickDate";
+const selectTime = "selectTime";
+const submit = "submit";
+const selectDuration = "selectDuration";
+const tablePlacesAmount = "tablePlacesAmount";
+const timeNotAvailable = "timeNotAvailable";
+const availableTables = "availableTables";
 
 const Map<String, String> en_US = {
   flag: "🇺🇸",
@@ -73,4 +83,14 @@ const Map<String, String> en_US = {
   previewStr: "Preview",
   pickTitleImage: "Pick title image",
   pickImages: "Pick images",
+  whatLooking: 'What are you looking for?',
+  nothing: "Nothing",
+  reservation: "Reservation",
+  pickDate: 'Pick date',
+  selectTime: "Select time",
+  submit: "Submit",
+  selectDuration: "Meeting duration",
+  tablePlacesAmount: "Table places amount",
+  timeNotAvailable: "This time not available",
+  availableTables: "Available tables with @$placesStr places.",
 };

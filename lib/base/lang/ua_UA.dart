@@ -39,4 +39,13 @@ const Map<String, String> ua_UA = {
   previewStr: "Предогляд",
   pickTitleImage: "Оберіть головне зображення",
   pickImages: "Оберіть зображення",
+  whatLooking: 'Що ви шукаєте?',
+  nothing: "Нічого",
+  reservation: "Резервація",
+  selectTime: "Оберіть час",
+  submit: "Підтвердити",
+  selectDuration: "Тривалість зустрічі",
+  tablePlacesAmount: "Кількість чоловік",
+  timeNotAvailable: "Цей час не доступний",
+  availableTables: "Доступні столи c @$placesStr місцями.",
 };
