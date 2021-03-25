@@ -16,7 +16,10 @@ class HomeController extends GetxController {
     resp.fold(
       (err) => snackbarError(errorStr.tr, err.message),
       (stream) {
-        _restaurants.bindStream(stream);
+        _restaurants.bindStream(
+          stream.map((list) =>
+              list.where((element) => element != null).map((e) => e!).toList()),
+        );
       },
     );
   }
@@ -25,8 +28,8 @@ class HomeController extends GetxController {
   set searchVisible(bool? value) => this._searchVisible.value = value;
   bool? get searchVisible => this._searchVisible.value;
 
-  var _restaurants = <Restaurant?>[].obs;
+  var _restaurants = <Restaurant>[].obs;
   set restaurants(List<Restaurant?> value) =>
-      this._restaurants = value as RxList<Restaurant?>;
-  List<Restaurant?> get restaurants => this._restaurants;
+      this._restaurants = value as RxList<Restaurant>;
+  List<Restaurant> get restaurants => this._restaurants;
 }

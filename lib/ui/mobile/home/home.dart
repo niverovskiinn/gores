@@ -24,7 +24,7 @@ class HomeScreen extends GetView<HomeController> {
               color: Colors.transparent,
               boxShape: NeumorphicBoxShape.circle(),
             ),
-            child: Icon(Icons.person),
+            child: Icon(Icons.logout),
             onPressed: () {
               Get.find<AuthRepository>().logout();
             },
@@ -46,7 +46,9 @@ class HomeScreen extends GetView<HomeController> {
                 if (controller.searchVisible!)
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 20.0),
-                    child: SearchField(),
+                    child: SearchField(
+                      rests: controller.restaurants,
+                    ),
                   ),
                 SizedBox(
                   height: MediaQuery.of(context).size.height *
