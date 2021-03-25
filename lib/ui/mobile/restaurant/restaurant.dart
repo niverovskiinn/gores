@@ -8,7 +8,7 @@ import 'package:gores/ui/widgets/background.dart';
 import 'package:gores/ui/widgets/wrapper.dart';
 
 class RestaurantPage extends StatelessWidget {
-  late final controller = RestaurantController(Get.arguments as Restaurant?);
+  late final controller = RestaurantController(Get.arguments as Restaurant);
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class RestaurantPage extends StatelessWidget {
         ),
         body: DefaultWrapper(
           child: RestaurantView(
-            restaurant: controller.restaurant ?? Restaurant(),
+            restaurant: controller.restaurant,
             controller: controller,
           ),
         ),

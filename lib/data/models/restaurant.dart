@@ -64,6 +64,15 @@ class Restaurant extends Equatable {
         this.created,
         this.reservations
       ];
+
+  Reservation? getReservation(int year, int month, int day) {
+    final res = reservations?.where((element) =>
+        element.date?.day == day &&
+        element.date?.month == month &&
+        element.date?.year == year);
+    if (res != null && res.isNotEmpty) return res.first;
+  }
+
   @override
   bool? get stringify => true;
   factory Restaurant.fromJson(Map<String, dynamic> json) =>
