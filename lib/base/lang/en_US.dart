@@ -44,6 +44,13 @@ const selectDuration = "selectDuration";
 const tablePlacesAmount = "tablePlacesAmount";
 const timeNotAvailable = "timeNotAvailable";
 const availableTables = "availableTables";
+const successStr = "success";
+const tableReserved = "tableReserved";
+const selectCafe = "selectCafe";
+const clientPhone = "clientPhone";
+const beginTime = "beginTime";
+const finishedTime = "finishedTime";
+const peopleAmount = "peopleAmount";
 
 const Map<String, String> en_US = {
   flag: "🇺🇸",
@@ -93,4 +100,11 @@ const Map<String, String> en_US = {
   tablePlacesAmount: "Table places amount",
   timeNotAvailable: "This time not available",
   availableTables: "Available tables with @$placesStr places.",
+  successStr: "Success",
+  tableReserved: "Table reserved!",
+  selectCafe: "Select cafe",
+  clientPhone: "Client phone",
+  beginTime: "Begin time",
+  finishedTime: "Finished Time",
+  peopleAmount: "People amount",
 };

@@ -79,7 +79,7 @@ class AdminHomePage extends GetView<AdminHomeController> {
                         )
                       : Center(
                           child: Text(
-                            "Select cafe",
+                            selectCafe.tr,
                             style: Get.textTheme?.headline4?.copyWith(
                               color: Colors.grey,
                             ),

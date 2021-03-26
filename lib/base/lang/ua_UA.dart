@@ -48,4 +48,7 @@ const Map<String, String> ua_UA = {
   tablePlacesAmount: "Кількість чоловік",
   timeNotAvailable: "Цей час не доступний",
   availableTables: "Доступні столи c @$placesStr місцями.",
+  successStr: "Успішно",
+  tableReserved: "Стіл заброньовано!",
+  selectCafe: "Оберіть заклад",
 };

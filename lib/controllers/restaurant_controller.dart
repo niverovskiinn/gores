@@ -20,11 +20,17 @@ class RestaurantController extends GetxController {
         .restaurant
         .tables
         ?.sort((e1, e2) => (e1.capacity ?? 0).compareTo(e2.capacity ?? 0));
+    ever(
+      _selectedDate,
+      (DateTime? val) => _getReservations(
+        restId: restaurant.id!,
+        date: Date.fromDateTime(val!),
+      ),
+    );
   }
   late final _restaurant = Rx<Restaurant>();
   set restaurant(Restaurant value) {
     this._restaurant.value = value;
-    _getReservations();
   }
 
   Restaurant get restaurant => this._restaurant.value!;
@@ -49,10 +55,7 @@ class RestaurantController extends GetxController {
   int get duration => this._duration.value;
 
   final _selectedDate = DateTime.now().obs;
-  set selectedDate(DateTime? value) {
-    this._selectedDate.value = value;
-    _getReservations();
-  }
+  set selectedDate(DateTime? value) => this._selectedDate.value = value;
 
   DateTime? get selectedDate => this._selectedDate.value;
 
@@ -62,15 +65,13 @@ class RestaurantController extends GetxController {
 
   final _reservations = <Reservation>[].obs;
 
-  Future<void> _getReservations() async {
-    if (selectedDate != null) {
-      final resp = await _reservationRepository.getReservations(
-          restaurant.id!, Date.fromDateTime(selectedDate!));
-      resp.fold(
-        (error) => snackbarError(errorStr.tr, error.message),
-        (res) => _reservations.bindStream(res),
-      );
-    }
+  Future<void> _getReservations(
+      {required String restId, required Date date}) async {
+    final resp = await _reservationRepository.getReservations(restId, date);
+    resp.fold(
+      (error) => snackbarError(errorStr.tr, error.message),
+      (res) => _reservations.bindStream(res),
+    );
   }
 
   bool checkTimeForAvailability() {
@@ -104,6 +105,9 @@ class RestaurantController extends GetxController {
       clientPhone: _profileController.profile!.phone,
     );
     final resp = await _reservationRepository.addReservation(reservation);
-    resp.fold((error) => snackbarError(errorStr.tr, error.message), (_) {});
+    resp.fold((error) => snackbarError(errorStr.tr, error.message), (_) {
+      Get.back();
+      snackbarSuccess(successStr.tr, tableReserved.tr);
+    });
   }
 }

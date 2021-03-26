@@ -38,25 +38,25 @@ class AdminRestaurantPage extends StatelessWidget {
       children: [
             TableRow(children: [
               Text(
-                "Client Phone",
+                clientPhone.tr,
                 textAlign: TextAlign.center,
                 style: Get.textTheme!.subtitle1!
                     .copyWith(fontWeight: FontWeight.bold, fontSize: 20),
               ),
               Text(
-                "Begin Time",
+                beginTime.tr,
                 textAlign: TextAlign.center,
                 style: Get.textTheme!.subtitle1!
                     .copyWith(fontWeight: FontWeight.bold, fontSize: 20),
               ),
               Text(
-                "Finished Time",
+                finishedTime.tr,
                 textAlign: TextAlign.center,
                 style: Get.textTheme!.subtitle1!
                     .copyWith(fontWeight: FontWeight.bold, fontSize: 20),
               ),
               Text(
-                "People amount",
+                peopleAmount.tr,
                 textAlign: TextAlign.center,
                 style: Get.textTheme!.subtitle1!
                     .copyWith(fontWeight: FontWeight.bold, fontSize: 20),

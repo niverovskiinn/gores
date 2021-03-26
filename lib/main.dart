@@ -37,8 +37,9 @@ class MyApp extends StatelessWidget {
 
   void prepare() async {
     await Get.find<TranslationService>().restoreLocale();
-
-    if (Get.find<AuthRepository>().isLoggedIn()) {
+    final authRep = Get.find<AuthRepository>();
+    if (authRep.isLoggedIn()) {
+      authRep.initProfile(authRep.currentUser!.uid);
       Get.offAllNamed(kIsWeb ? Routes.adminHome : Routes.home);
     } else {
       Get.offAllNamed(Routes.login);

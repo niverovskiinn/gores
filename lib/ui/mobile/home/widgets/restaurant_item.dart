@@ -58,16 +58,16 @@ class RestaurantItem extends StatelessWidget {
                         maxLines: 4,
                         overflow: TextOverflow.ellipsis,
                       ),
-                      RatingBarIndicator(
-                        rating: item.rating ?? 0,
-                        itemBuilder: (context, index) => Icon(
-                          Icons.star,
-                          color: pinkColor,
-                        ),
-                        itemCount: 5,
-                        itemSize: 15,
-                        direction: Axis.horizontal,
-                      ),
+                      // RatingBarIndicator(
+                      //   rating: item.rating ?? 0,
+                      //   itemBuilder: (context, index) => Icon(
+                      //     Icons.star,
+                      //     color: pinkColor,
+                      //   ),
+                      //   itemCount: 5,
+                      //   itemSize: 15,
+                      //   direction: Axis.horizontal,
+                      // ),
                       _buildPrice(item.price),
                     ],
                   ),

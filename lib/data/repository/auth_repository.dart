@@ -35,15 +35,7 @@ class AuthRepository {
       );
       await Database.instance.createProfile(profile);
       if (userCred.user != null) {
-        final profile = await Database.instance.getProfile(userCred.user!.uid);
-        if (profile != null &&
-            (!kIsWeb && profile.role == Roles.admin ||
-                kIsWeb && profile.role == Roles.user)) {
-          logout();
-          return false;
-        }
-        Get.find<ProfileController>().profile = profile;
-        return true;
+        return await initProfile(userCred.user!.uid);
       }
       return true;
     } on FirebaseAuthException catch (e) {
@@ -55,6 +47,18 @@ class AuthRepository {
     }
   }
 
+  Future<bool> initProfile(String id) async {
+    final profile = await Database.instance.getProfile(id);
+    if (profile != null &&
+        (!kIsWeb && profile.role == Roles.admin ||
+            kIsWeb && profile.role == Roles.user)) {
+      logout();
+      return false;
+    }
+    Get.find<ProfileController>().profile = profile;
+    return true;
+  }
+
   Future<bool> login(String email, String password) async {
     try {
       final userCred = await _firebaseAuth.signInWithEmailAndPassword(
@@ -62,15 +66,7 @@ class AuthRepository {
         password: password,
       );
       if (userCred.user != null) {
-        final profile = await Database.instance.getProfile(userCred.user!.uid);
-        if (profile != null &&
-            (!kIsWeb && profile.role == Roles.admin ||
-                kIsWeb && profile.role == Roles.user)) {
-          logout();
-          return false;
-        }
-        Get.find<ProfileController>().profile = profile;
-        return true;
+        return await initProfile(userCred.user!.uid);
       }
       return false;
     } on FirebaseAuthException catch (e) {
