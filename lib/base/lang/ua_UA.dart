@@ -51,4 +51,8 @@ const Map<String, String> ua_UA = {
   successStr: "Успішно",
   tableReserved: "Стіл заброньовано!",
   selectCafe: "Оберіть заклад",
+  clientPhone: "Телефон клієнта",
+  beginTime: "Початок",
+  finishedTime: "Кінець",
+  peopleAmount: "Кількість осіб",
 };
