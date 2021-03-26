@@ -46,6 +46,9 @@ class Restaurant extends Equatable {
       this.created})
       : id = Uuid().v4();
 
+  List<String?> get imagesAll =>
+      (titleImageUrl != null ? [titleImageUrl!] : <String>[]) +
+      (imageUrls ?? []);
   @override
   List<Object?> get props => [
         this.id,

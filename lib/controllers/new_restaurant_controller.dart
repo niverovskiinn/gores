@@ -10,7 +10,9 @@ import 'package:uuid/uuid.dart';
 
 class NewRestaurantController extends GetxController {
   final AdminRepository repository;
-  NewRestaurantController({required this.repository});
+  NewRestaurantController({required this.repository}) {
+    ever(_titleUrl, (val) => print(val));
+  }
 
   final _id = Uuid().v4();
 
@@ -30,7 +32,7 @@ class NewRestaurantController extends GetxController {
   int? get price => this._price.value;
   set price(int? value) => this._price.value = value;
 
-  final _titleUrl = ''.obs;
+  final _titleUrl = Rx<String>();
   String? get titleUrl => this._titleUrl.value;
 
   final _imagesUrl = <String>[].obs;
@@ -55,7 +57,9 @@ class NewRestaurantController extends GetxController {
     final resp = await repository.pickTitleImage(_id);
     resp.fold(
       (err) => snackbarError(errorStr.tr, err.message),
-      (res) => _titleUrl.value = res,
+      (res) {
+        _titleUrl(res);
+      },
     );
   }
 

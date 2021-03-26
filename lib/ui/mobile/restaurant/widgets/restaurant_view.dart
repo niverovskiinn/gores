@@ -21,7 +21,6 @@ class RestaurantView extends StatelessWidget {
     required this.restaurant,
     this.controller,
   }) : super(key: key);
-  late final images = [restaurant.titleImageUrl] + (restaurant.imageUrls ?? []);
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -32,15 +31,16 @@ class RestaurantView extends StatelessWidget {
             itemBuilder: (BuildContext context, int index) {
               return GestureDetector(
                 onTap: () {
-                  Get.toNamed(Routes.imageView, arguments: images[index]);
+                  Get.toNamed(Routes.imageView,
+                      arguments: restaurant.imagesAll[index]);
                 },
                 child: Image.network(
-                  images[index]!,
+                  restaurant.imagesAll[index]!,
                   fit: BoxFit.contain,
                 ),
               );
             },
-            itemCount: images.length,
+            itemCount: restaurant.imagesAll.length,
             control: SwiperControl(color: pinkColor),
           ),
         ),
@@ -55,6 +55,7 @@ class RestaurantView extends StatelessWidget {
         Text(
           restaurant.description ?? unknown.tr,
           style: Get.textTheme?.subtitle2,
+          softWrap: true,
         ),
         if (controller != null)
           Neumorphic(
@@ -118,7 +119,7 @@ class RestaurantView extends StatelessWidget {
               style: NeumorphicStyle(color: Colors.transparent),
               margin: EdgeInsets.symmetric(horizontal: 20),
               onPressed: () async {
-               await controller!.addReservation();
+                await controller!.addReservation();
               },
               child: Text(
                 submit.tr,

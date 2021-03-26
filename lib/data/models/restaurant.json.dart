@@ -38,7 +38,7 @@ Map<String, dynamic> _$RestaurantToJson(Restaurant instance) =>
       'imageUrls': instance.imageUrls,
       if (instance.tables != null)
         'tables': instance.tables!.map((e) => e.toJson()).toList(),
-      'created': instance.created
+      'created': instance.created.toString()
     };
 
 K _$enumDecode<K, V>(

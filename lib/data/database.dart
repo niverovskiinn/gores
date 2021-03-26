@@ -69,7 +69,6 @@ class Database {
   Future<Stream<List<Restaurant?>>> getAdminRestaurants(String adminId) async {
     final admin = await _db.collection(users).doc(adminId).get();
     final restIds = admin.data()?[restaurants] as List;
-    print("restIds  $restIds");
     final restaurantsSnapshot =
         _db.collection(restaurants).where(id, whereIn: restIds).snapshots();
     return restaurantsSnapshot.map((e) {

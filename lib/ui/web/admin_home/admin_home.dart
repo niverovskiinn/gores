@@ -40,8 +40,8 @@ class AdminHomePage extends GetView<AdminHomeController> {
                   flex: 1,
                   child: Obx(
                     () {
-                      return ListView(
-                        children: controller.restaurants.map(
+                      return ListView(children: [
+                        ...controller.restaurants.map(
                           (e) {
                             return e != null
                                 ? ListTile(
@@ -55,41 +55,38 @@ class AdminHomePage extends GetView<AdminHomeController> {
                                   )
                                 : SizedBox();
                           },
-                        ).toList()
-                          ..add(NeumorphicButton(
-                            margin: EdgeInsets.all(20),
-                            style: NeumorphicStyle(
-                              color: Colors.transparent,
-                              boxShape: NeumorphicBoxShape.circle(),
-                            ),
-                            child: Icon(
-                              Icons.add,
-                            ),
-                            onPressed: () {
-                              Get.toNamed(Routes.newRestaurant);
-                            },
-                          )),
-                      );
+                        ).toList(),
+                        IconButton(
+                          splashColor: pinkColor,
+                          onPressed: () {
+                            Get.toNamed(Routes.newRestaurant);
+                          },
+                          icon: Icon(
+                            Icons.add,
+                          ),
+                        )
+                      ]);
                     },
                   )),
               Expanded(
-                  flex: 4,
-                  child: Obx(
-                    () => controller.selectedId != null &&
-                            (controller.selectedId?.isNotEmpty ?? false)
-                        ? AdminRestaurantPage(
-                            item: controller.restaurants.firstWhere(
-                                (e) => e?.id == controller.selectedId)!,
-                          )
-                        : Center(
-                            child: Text(
-                              "Select cafe",
-                              style: Get.textTheme?.headline4?.copyWith(
-                                color: Colors.grey,
-                              ),
+                flex: 4,
+                child: Obx(
+                  () => controller.selectedId != null &&
+                          (controller.selectedId?.isNotEmpty ?? false)
+                      ? AdminRestaurantPage(
+                          item: controller.restaurants.firstWhere(
+                              (e) => e?.id == controller.selectedId)!,
+                        )
+                      : Center(
+                          child: Text(
+                            "Select cafe",
+                            style: Get.textTheme?.headline4?.copyWith(
+                              color: Colors.grey,
                             ),
                           ),
-                  )),
+                        ),
+                ),
+              ),
             ],
           ),
         ),

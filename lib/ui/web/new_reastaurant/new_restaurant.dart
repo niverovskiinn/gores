@@ -97,7 +97,7 @@ class NewRestaurantPage extends StatelessWidget {
           SizedBox(
             height: 15,
           ),
-          NeumorphicButton(
+          ElevatedButton(
             child: Text(pickTitleImage.tr),
             onPressed: () {
               controller.pickTitleImage();
@@ -128,14 +128,18 @@ class NewRestaurantPage extends StatelessWidget {
   ) {
     return Stack(
       children: [
-        IgnorePointer(
-            child: Neumorphic(
-                style: NeumorphicStyle(
-                  depth: -neumorphicDepth,
-                  color: Colors.transparent,
-                ),
+        Neumorphic(
+          style: NeumorphicStyle(
+            depth: -neumorphicDepth,
+            color: Colors.transparent,
+          ),
+          padding: defaultHorizontalPadding.copyWith(top: 40),
+          child: Obx(
+            () => SingleChildScrollView(
+              child: IgnorePointer(
                 child: RestaurantView(
                   restaurant: Restaurant(
+                    address: controller.address,
                     name: controller.name,
                     description: controller.description,
                     imageUrls: controller.images,
@@ -145,7 +149,11 @@ class NewRestaurantPage extends StatelessWidget {
                         : null,
                     tables: controller.tables,
                   ),
-                ))),
+                ),
+              ),
+            ),
+          ),
+        ),
         Align(
           alignment: Alignment.topCenter,
           child: Text(
