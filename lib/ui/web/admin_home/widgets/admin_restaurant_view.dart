@@ -5,10 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gores/controllers/admin_restaurant_controller.dart';
 import 'package:gores/data/models/restaurant.dart';
+import 'package:gores/utils/extensions.dart';
 
 class AdminRestaurantPage extends StatelessWidget {
   final Restaurant item;
-  final controller = AdminRestaurantController(Get.find(), Get.find());
+  final AdminRestaurantController controller = Get.find();
 
   AdminRestaurantPage({Key? key, required this.item}) : super(key: key) {
     controller.restaurant = item;
@@ -70,11 +71,11 @@ class AdminRestaurantPage extends StatelessWidget {
                     textAlign: TextAlign.center,
                   ),
                   Text(
-                    e.beginTime.toString(),
+                    e.beginTime!.toFormattedString(),
                     textAlign: TextAlign.center,
                   ),
                   Text(
-                    e.finishedTime.toString(),
+                    e.finishedTime!.toFormattedString(),
                     textAlign: TextAlign.center,
                   ),
                   Text(
@@ -91,23 +92,24 @@ class AdminRestaurantPage extends StatelessWidget {
     BuildContext context,
   ) {
     return TextButton(
-      onPressed: () {
-        showDatePicker(
+      onPressed: () async {
+        final date = await showDatePicker(
           context: context,
-          initialDate: controller.date,
+          initialDate: controller.date ?? DateTime.now(),
           firstDate: controller.restaurant?.created ?? DateTime.now(),
           lastDate: DateTime.now().add(
             Duration(days: 7),
           ),
-        ).then((value) {
-          if (value != null) controller.date = value;
-        });
+        );
+        if (date != null) controller.date = date;
       },
-      child: Text(
-        DateFormat('dd.MM.yyyy').format(
-          controller.date,
+      child: Obx(
+        () => Text(
+          DateFormat('dd.MM.yyyy').format(
+            controller.date ?? DateTime.now(),
+          ),
+          style: TextStyle(fontSize: 15),
         ),
-        style: TextStyle(fontSize: 15),
       ),
     );
   }

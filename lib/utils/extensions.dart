@@ -10,4 +10,15 @@ extension Operations on TimeOfDay {
         hour: hour + hours,
         minute: minute + minutes,
       );
+  String toFormattedString() {
+    return "${_addZero(hour)}:${_addZero(minute)}";
+  }
+
+  String _addZero(int val) {
+    if (val > 9) {
+      return val.toString();
+    } else {
+      return "0$val";
+    }
+  }
 }

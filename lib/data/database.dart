@@ -1,4 +1,4 @@
-import 'dart:math';
+import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:gores/data/models/reservation.dart';
@@ -92,10 +92,13 @@ class Database {
       String reservRestId, Date reservDate) async {
     final reservationsSnapshot = _db
         .collection(reservations)
-        .where(date, isEqualTo: reservDate)
+        .where(date, isEqualTo: reservDate.toJson())
         .where(restId, isEqualTo: reservRestId)
         .snapshots();
     return reservationsSnapshot.map((e) {
+      e.docs.forEach((element) {
+        log(element.data().toString());
+      });
       return e.docs
           .where((e) => e.exists)
           .map((element) => Reservation.fromJson(element.data()!))

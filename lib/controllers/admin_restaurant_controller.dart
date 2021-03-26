@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:get/get.dart';
 import 'package:gores/base/lang/en_US.dart';
 import 'package:gores/data/models/reservation.dart';
@@ -12,36 +14,44 @@ class AdminRestaurantController extends GetxController {
   AdminRestaurantController(
     this._adminRepository,
     this._reservationRepository,
-  );
+  ) {
+    ever(
+      _date,
+      (DateTime? val) => _getReservations(
+        restId: restaurant!.id!,
+        date: Date.fromDateTime(val!),
+      ),
+    );
+    ever(
+      _restaurant,
+      (Restaurant? rest) {
+        date = DateTime.now();
+        return _getReservations(
+          restId: rest!.id!,
+          date: Date.fromDateTime(date ?? DateTime.now()),
+        );
+      },
+    );
+  }
 
   final _reservations = <Reservation>[].obs;
   set reservations(List<Reservation> value) => this._reservations(value);
   List<Reservation> get reservations => this._reservations;
 
-  final _date = DateTime.now().obs;
-  set date(DateTime value) {
-    this._date.value = value;
-    _getReservations();
-  }
+  final _date = Rx<DateTime>();
+  set date(DateTime? value) => this._date(value);
+  DateTime? get date => this._date.value;
 
-  Future<void> _getReservations() async {
-    if (restaurant != null) {
-      final resp = await _reservationRepository.getReservations(
-          restaurant!.id!, Date.fromDateTime(date));
-      resp.fold(
-        (error) => snackbarError(errorStr.tr, error.message),
-        (res) => _reservations.bindStream(res),
-      );
-    }
+  Future<void> _getReservations(
+      {required String restId, required Date date}) async {
+    final resp = await _reservationRepository.getReservations(restId, date);
+    resp.fold(
+      (error) => snackbarError(errorStr.tr, error.message),
+      (res) => _reservations.bindStream(res),
+    );
   }
-
-  DateTime get date => this._date.value!;
 
   final _restaurant = Rx<Restaurant>();
-  set restaurant(Restaurant? value) {
-    this._restaurant(value);
-    _getReservations();
-  }
-
+  set restaurant(Restaurant? value) => this._restaurant(value);
   Restaurant? get restaurant => this._restaurant.value;
 }
