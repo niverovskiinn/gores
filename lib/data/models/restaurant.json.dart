@@ -8,24 +8,21 @@ part of 'restaurant.dart';
 
 Restaurant _$RestaurantFromJson(Map<String, dynamic> json) {
   return Restaurant(
-      id: json['id'] as String?,
-      name: json['name'] as String?,
-      created: DateTime.tryParse(json['created'] as String? ?? ""),
-      description: json['description'] as String?,
-      address: json['address'] as String?,
-      titleImageUrl: json['titleImageUrl'] as String?,
-      rating: (json['rating'] as num?)?.toDouble(),
-      price: _$enumDecodeNullable(_$PriceEnumMap, json['price']),
-      imageUrls: (json['imageUrls'] as List<dynamic>?)
-          ?.map((e) => e as String)
-          .toList(),
-      visible: json['visible'] as bool?,
-      tables: (json['tables'] as List<dynamic>?)
-          ?.map((e) => RestaurantTables.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      reservations: (json['reservations'] as List<dynamic>?)
-          ?.map((e) => Reservation.fromJson(e as Map<String, dynamic>))
-          .toList());
+    id: json['id'] as String?,
+    name: json['name'] as String?,
+    created: DateTime.tryParse(json['created'] as String? ?? ""),
+    description: json['description'] as String?,
+    address: json['address'] as String?,
+    titleImageUrl: json['titleImageUrl'] as String?,
+    rating: (json['rating'] as num?)?.toDouble(),
+    price: _$enumDecodeNullable(_$PriceEnumMap, json['price']),
+    imageUrls:
+        (json['imageUrls'] as List<dynamic>?)?.map((e) => e as String).toList(),
+    visible: json['visible'] as bool?,
+    tables: (json['tables'] as List<dynamic>?)
+        ?.map((e) => RestaurantTables.fromJson(e as Map<String, dynamic>))
+        .toList(),
+  );
 }
 
 Map<String, dynamic> _$RestaurantToJson(Restaurant instance) =>
@@ -41,8 +38,6 @@ Map<String, dynamic> _$RestaurantToJson(Restaurant instance) =>
       'imageUrls': instance.imageUrls,
       if (instance.tables != null)
         'tables': instance.tables!.map((e) => e.toJson()).toList(),
-      if (instance.reservations != null)
-        'reservations': instance.reservations!.map((e) => e.toJson()).toList(),
       'created': instance.created
     };
 

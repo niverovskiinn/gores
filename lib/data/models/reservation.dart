@@ -1,19 +1,61 @@
 import 'dart:developer';
 
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'reservation.g.dart';
 
-@JsonSerializable()
-class Reservation extends Equatable {
-  final DateTime? date;
-  final List<MeetingEvent>? events;
-
-  Reservation({this.date, this.events});
+class TimeSerialiser implements JsonConverter<TimeOfDay?, String> {
+  const TimeSerialiser();
 
   @override
-  List<Object?> get props => [this.date, this.events];
+  TimeOfDay fromJson(String json) => TimeOfDay(
+      hour: int.parse(json.substring(0, 2)),
+      minute: int.parse(json.substring(3)));
+
+  @override
+  String toJson(TimeOfDay? time) =>
+      "${_addZero(time!.hour)}:${_addZero(time.minute)}";
+
+  String _addZero(int val) {
+    if (val > 9) {
+      return val.toString();
+    } else {
+      return "0$val";
+    }
+  }
+}
+
+@JsonSerializable()
+class Reservation extends Equatable {
+  final Date? date;
+  final String? clientPhone;
+  @TimeSerialiser()
+  final TimeOfDay? beginTime;
+  final int? tablePlaces;
+  @TimeSerialiser()
+  final TimeOfDay? finishedTime;
+  final String? restId;
+
+  Reservation({
+    this.date,
+    this.beginTime,
+    this.tablePlaces,
+    this.finishedTime,
+    this.clientPhone,
+    this.restId,
+  });
+
+  @override
+  List<Object?> get props => [
+        this.date,
+        this.beginTime,
+        this.tablePlaces,
+        this.finishedTime,
+        this.clientPhone,
+        this.restId,
+      ];
 
   @override
   bool? get stringify => true;
@@ -23,32 +65,49 @@ class Reservation extends Equatable {
   Map<String, dynamic> toJson() => _$ReservationToJson(this);
 }
 
-@JsonSerializable()
-class MeetingEvent extends Equatable {
-  final String? clientPhone;
-  final DateTime? time;
-  final int? tablePlaces;
-  final DateTime? finishedTime;
+class Date extends Equatable {
+  final int? year;
+  final int? month;
+  final int? day;
 
-  MeetingEvent({
-    this.time,
-    this.tablePlaces,
-    this.finishedTime,
-    this.clientPhone,
+  Date({
+    this.year,
+    this.month,
+    this.day,
   });
+
+  factory Date.fromDateTime(DateTime dateTime) => Date(
+        day: dateTime.day,
+        month: dateTime.month,
+        year: dateTime.year,
+      );
 
   @override
   List<Object?> get props => [
-        this.time,
-        this.tablePlaces,
-        this.finishedTime,
-        this.clientPhone,
+        this.year,
+        this.month,
+        this.day,
       ];
+  String _addZero(int val) {
+    if (val > 9) {
+      return val.toString();
+    } else {
+      return "0$val";
+    }
+  }
+
+  @override
+  String toString() {
+    return toJson();
+  }
 
   @override
   bool? get stringify => true;
 
-  factory MeetingEvent.fromJson(Map<String, dynamic> json) =>
-      _$MeetingEventFromJson(json);
-  Map<String, dynamic> toJson() => _$MeetingEventToJson(this);
+  factory Date.fromJson(String json) => Date(
+        day: int.parse(json.substring(0, 2)),
+        month: int.parse(json.substring(3, 5)),
+        year: int.parse(json.substring(6)),
+      );
+  String toJson() => "${_addZero(day!)}.${_addZero(month!)}.$year";
 }

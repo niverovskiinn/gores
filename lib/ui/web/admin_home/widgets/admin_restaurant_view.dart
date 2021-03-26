@@ -8,7 +8,7 @@ import 'package:gores/data/models/restaurant.dart';
 
 class AdminRestaurantPage extends StatelessWidget {
   final Restaurant item;
-  final controller = AdminRestaurantController(repository: Get.find());
+  final controller = AdminRestaurantController(Get.find(), Get.find());
 
   AdminRestaurantPage({Key? key, required this.item}) : super(key: key) {
     controller.restaurant = item;
@@ -20,7 +20,7 @@ class AdminRestaurantPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Reservations",
+            reservation.tr,
             style: Get.textTheme?.headline3,
           ),
           _buildDateButton(context),
@@ -33,8 +33,6 @@ class AdminRestaurantPage extends StatelessWidget {
   Widget _buildReservationsTable(
     BuildContext context,
   ) {
-    final timeFormat = (DateTime? time) =>
-        time != null ? DateFormat('HH:mm').format(time) : unknown.tr;
     return Table(
       children: [
             TableRow(children: [
@@ -64,29 +62,28 @@ class AdminRestaurantPage extends StatelessWidget {
               ),
             ])
           ] +
-          (controller.reservation?.events
-                  ?.map(
-                    (e) => TableRow(children: [
-                      Text(
-                        e.clientPhone ?? unknown.tr,
-                        textAlign: TextAlign.center,
-                      ),
-                      Text(
-                        timeFormat(e.time),
-                        textAlign: TextAlign.center,
-                      ),
-                      Text(
-                        timeFormat(e.finishedTime),
-                        textAlign: TextAlign.center,
-                      ),
-                      Text(
-                        e.tablePlaces?.toString() ?? unknown.tr,
-                        textAlign: TextAlign.center,
-                      ),
-                    ]),
-                  )
-                  .toList() ??
-              []),
+          (controller.reservations
+              .map(
+                (e) => TableRow(children: [
+                  Text(
+                    e.clientPhone ?? unknown.tr,
+                    textAlign: TextAlign.center,
+                  ),
+                  Text(
+                    e.beginTime.toString(),
+                    textAlign: TextAlign.center,
+                  ),
+                  Text(
+                    e.finishedTime.toString(),
+                    textAlign: TextAlign.center,
+                  ),
+                  Text(
+                    e.tablePlaces?.toString() ?? unknown.tr,
+                    textAlign: TextAlign.center,
+                  ),
+                ]),
+              )
+              .toList()),
     );
   }
 
@@ -97,16 +94,18 @@ class AdminRestaurantPage extends StatelessWidget {
       onPressed: () {
         showDatePicker(
           context: context,
-          initialDate: controller.date ?? DateTime.now(),
+          initialDate: controller.date,
           firstDate: controller.restaurant?.created ?? DateTime.now(),
           lastDate: DateTime.now().add(
             Duration(days: 7),
           ),
-        ).then((value) => controller.date = value);
+        ).then((value) {
+          if (value != null) controller.date = value;
+        });
       },
       child: Text(
         DateFormat('dd.MM.yyyy').format(
-          controller.date ?? DateTime.now(),
+          controller.date,
         ),
         style: TextStyle(fontSize: 15),
       ),

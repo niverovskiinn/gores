@@ -117,7 +117,9 @@ class RestaurantView extends StatelessWidget {
             NeumorphicButton(
               style: NeumorphicStyle(color: Colors.transparent),
               margin: EdgeInsets.symmetric(horizontal: 20),
-              onPressed: () {},
+              onPressed: () async {
+               await controller!.addReservation();
+              },
               child: Text(
                 submit.tr,
                 textAlign: TextAlign.center,
@@ -222,7 +224,6 @@ class RestaurantView extends StatelessWidget {
         );
       },
     );
-    print(controller!.time);
     if (controller!.time != null && controller!.checkTimeForAvailability()) {
       controller!.selectedDate = DateTime(
         controller!.selectedDate!.year,
@@ -234,7 +235,6 @@ class RestaurantView extends StatelessWidget {
     } else {
       snackbarError(errorStr.tr, timeNotAvailable.tr);
     }
-    print(controller!.selectedDate);
   }
 
   Future<void> _showDatePicker(BuildContext context) async {

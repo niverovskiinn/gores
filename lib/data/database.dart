@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:gores/data/models/reservation.dart';
 import 'package:gores/data/models/restaurant.dart';
 
 import 'models/profile.dart';
@@ -9,6 +10,9 @@ class Database {
   static const users = "users";
   static const restaurants = "restaurants";
   static const id = "id";
+  static const reservations = "reservations";
+  static const date = "date";
+  static const restId = "restId";
 
   Database._();
 
@@ -82,5 +86,24 @@ class Database {
         return element.exists ? Restaurant.fromJson(element.data()!) : null;
       }).toList();
     });
+  }
+
+  Future<Stream<List<Reservation>>> getReservationsStream(
+      String reservRestId, Date reservDate) async {
+    final reservationsSnapshot = _db
+        .collection(reservations)
+        .where(date, isEqualTo: reservDate)
+        .where(restId, isEqualTo: reservRestId)
+        .snapshots();
+    return reservationsSnapshot.map((e) {
+      return e.docs
+          .where((e) => e.exists)
+          .map((element) => Reservation.fromJson(element.data()!))
+          .toList();
+    });
+  }
+
+  Future<void> addReservation(Reservation reservation) async {
+    await _db.collection(reservations).add(reservation.toJson());
   }
 }

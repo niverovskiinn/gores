@@ -8,34 +8,22 @@ part of 'reservation.dart';
 
 Reservation _$ReservationFromJson(Map<String, dynamic> json) {
   return Reservation(
-    date: json['date'] == null ? null : DateTime.parse(json['date'] as String),
-    events: (json['events'] as List<dynamic>?)
-        ?.map((e) => MeetingEvent.fromJson(e as Map<String, dynamic>))
-        .toList(),
+    date: json['date'] == null ? null : Date.fromJson(json['date'] as String),
+    beginTime: const TimeSerialiser().fromJson(json['beginTime'] as String),
+    tablePlaces: json['tablePlaces'] as int?,
+    finishedTime:
+        const TimeSerialiser().fromJson(json['finishedTime'] as String),
+    clientPhone: json['clientPhone'] as String?,
+    restId: json['restId'] as String?,
   );
 }
 
 Map<String, dynamic> _$ReservationToJson(Reservation instance) =>
     <String, dynamic>{
-      'date': instance.date?.toIso8601String(),
-      'events': instance.events,
-    };
-
-MeetingEvent _$MeetingEventFromJson(Map<String, dynamic> json) {
-  return MeetingEvent(
-    time: json['time'] == null ? null : DateTime.parse(json['time'] as String),
-    tablePlaces: json['tablePlaces'] as int?,
-    finishedTime: json['finishedTime'] == null
-        ? null
-        : DateTime.parse(json['finishedTime'] as String),
-    clientPhone: json['clientPhone'] as String?,
-  );
-}
-
-Map<String, dynamic> _$MeetingEventToJson(MeetingEvent instance) =>
-    <String, dynamic>{
+      'date': instance.date?.toJson(),
       'clientPhone': instance.clientPhone,
-      'time': instance.time?.toIso8601String(),
+      'beginTime': const TimeSerialiser().toJson(instance.beginTime),
       'tablePlaces': instance.tablePlaces,
-      'finishedTime': instance.finishedTime?.toIso8601String(),
+      'restId': instance.restId,
+      'finishedTime': const TimeSerialiser().toJson(instance.finishedTime),
     };

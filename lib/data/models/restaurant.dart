@@ -18,7 +18,6 @@ class Restaurant extends Equatable {
   final bool? visible;
   final List<String>? imageUrls;
   final List<RestaurantTables>? tables;
-  final List<Reservation>? reservations;
   final DateTime? created;
 
   Restaurant(
@@ -32,8 +31,7 @@ class Restaurant extends Equatable {
       this.imageUrls,
       this.visible,
       this.tables,
-      this.created,
-      this.reservations});
+      this.created});
 
   Restaurant.uid(
       {this.name,
@@ -45,8 +43,7 @@ class Restaurant extends Equatable {
       this.imageUrls,
       this.visible,
       this.tables,
-      this.created,
-      this.reservations})
+      this.created})
       : id = Uuid().v4();
 
   @override
@@ -62,16 +59,7 @@ class Restaurant extends Equatable {
         this.visible,
         this.tables,
         this.created,
-        this.reservations
       ];
-
-  Reservation? getReservation(int year, int month, int day) {
-    final res = reservations?.where((element) =>
-        element.date?.day == day &&
-        element.date?.month == month &&
-        element.date?.year == year);
-    if (res != null && res.isNotEmpty) return res.first;
-  }
 
   @override
   bool? get stringify => true;
