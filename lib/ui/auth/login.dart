@@ -13,7 +13,6 @@ import 'package:gores/ui/widgets/default_button.dart';
 import 'package:gores/ui/widgets/default_password.dart';
 import 'package:gores/ui/widgets/default_text_field.dart';
 import 'package:gores/ui/widgets/wrapper.dart';
-import 'package:gores/utils/snackbars.dart';
 
 class LoginPage extends GetView<LoginController> {
   @override

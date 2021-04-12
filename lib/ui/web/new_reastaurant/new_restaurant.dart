@@ -97,7 +97,7 @@ class NewRestaurantPage extends StatelessWidget {
           SizedBox(
             height: 15,
           ),
-          ElevatedButton(
+          NeumorphicButton(
             child: Text(pickTitleImage.tr),
             onPressed: () {
               controller.pickTitleImage();
